@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>湖北政务服务网</title>
+    <link rel="stylesheet" href="/common/css/base.css">
+    <link rel="stylesheet" href="/common/layui/css/layui.css">
+
+
+
+    <!-- <link rel="stylesheet" href="/css/zwgk/SFGPListing.css">
+    <script src="/common/layui/layui.all.js"></script> -->
+
+    <style>
+        table {
+            /* border: 2px solid #6698cb; */
+            font-family: 'MicrosoftYaHei';
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        td {
+            border: 1px solid #000;
+        }
+
+        .table_one_one tr#r1.x68,
+        .table_two tr#r1.x66,
+        .table_one tr#r2.x94 {
+            background: #f3f8fc;
+        }
+
+        .layui-tab-title .layui-this {
+            background: #0076CE;
+            color: #fff;
+        }
+
+        .content_pad {
+            padding: 30px 0;
+        }
+
+        #GPSF_listing {
+            min-height: 1000px;
+        }
+
+        .page_title_x {
+            position: absolute;
+            top: -97px;
+            left: 0;
+        }
+
+        .page_title_x span {
+            vertical-align: middle;
+            font-size: 26px;
+            color: #fff;
+            margin-left: 6px;
+        }
+
+        .noListing {
+            text-align: center;
+            min-height: 220px;
+            margin-top: 150px;
+        }
+
+        .noListing>p {
+            margin-top: 20px;
+        }
+
+        .w {
+            width: 1200px !important;
+        }
+
+        @media screen and (max-width: 1439px) and (min-width: 1366px) {
+            .w {
+                width: 1032px !important;
+            }
+
+        }
+
+        @media screen and (max-width: 1365px) and (min-width: 1024px) {
+            .w {
+                width: 952px !important;
+            }
+
+        }
+
+        @media screen and (max-width: 1023px) and (min-width: 768px) {
+
+            .w {
+                width: 696px !important;
+            }
+        }
+
+        @media screen and (max-width: 767px) {}
+
+        /* #GPSF_listing{height:25380px!important} */
+    </style>
+    
+</head>
+
+<body>
+    <!-- 公共头部 -->
+    <div id="cm_top"></div>
+    <!-- 版心1040  类名 w 控制 -->
+    <div class="w" style="position: relative">
+        <div class="page_title_x"><img src="../../../../images/daohang.png" width="15px" alt=""><span
+                class="cur-service-object-name4">服务清单·收费清单</span></div>
+        <div class="andy-common-path">
+            <span style="margin-left: 0"><a href="/" style="color:rgba(106, 106, 107, 1)">首页</a></span>&gt;<span><a
+                    href="/webview/zwgk/zwgk.html"
+                    style="color:rgba(106, 106, 107, 1)">服务清单</a></span>&gt;<span>收费清单</span>
+        </div>
+        <div class="">
+            <table border='0' cellpadding='0' cellspacing='0' width='910' style='border-collapse: 
+              collapse;table-layout:fixed;'>
+              <col width='71' span='6' style='width:53.25pt'>
+              <col width='271' style='mso-width-source:userset;width:203.25pt'>
+              <col width='71' span='3' style='width:53.25pt'>
+              <tr height='21' style='mso-height-source:userset;height:15.9pt' id='r1'>
+              <td colspan='10' height='17' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:12.9pt;'>全省法院综合性涉企收费目录清单</td>
+              </tr>
+              <tr height='33' style='mso-height-source:userset;height:25.2pt' id='r2'>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>部门名称</td>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>收费单位名称</td>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>单位性质</td>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>收费项目</td>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>收费性质</td>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>服务内容或涉及事项</td>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>收费标准</td>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>标准制定方式及部门</td>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>政策依据</td>
+              <td rowspan='2' height='49' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:37.35pt;'>备注</td>
+              </tr>
+              <tr height='20' style='mso-height-source:userset;height:15.15pt' id='r3'>
+              </tr>
+              <tr height='142' style='mso-height-source:userset;height:107.1pt' id='r4'>
+              <td rowspan='18' height='2495' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1872pt;'>湖北省高级人民法院</td>
+              <td rowspan='18' height='2495' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1872pt;'>全省各级人民法院</td>
+              <td rowspan='18' height='2495' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1872pt;'>法院</td>
+              <td rowspan='18' height='2495' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1872pt;'>案件受理费</td>
+              <td rowspan='18' height='2495' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1872pt;'>行政事业性收费</td>
+              <td rowspan='18' height='2495' class='x72' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1872pt;'>当事人进行民事诉讼、行政诉讼等，应当向人民法院交纳的案件受理费。</td>
+              <td class='x73'>一、财产案件根据诉讼请求的金额或者价额，按照比例分段累计交纳：</td>
+              <td rowspan='18' height='2495' class='x72' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1872pt;'>政府制定，制定部门为国务院，省物价局、省财政厅及本部门</td>
+              <td rowspan='18' height='2495' class='x72' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1872pt;'>1.《诉讼费用交纳办法》（国务院令第481号）；2.《湖北省物价局 湖北省财政厅 湖北省高级人民法院关于制定部分诉讼费收费标准的通知》（鄂价费〔2008〕5号）</td>
+              <td rowspan='18' height='2495' class='x78' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1872pt;'></td>
+              </tr>
+              <tr height='212' style='mso-height-source:userset;height:159.15pt' id='r5'>
+              <td class='x74'>不超过1万元的每件交纳50元；                                                            超过1万元至10万元的部分按2.5%交纳；</td>
+              </tr>
+              <tr height='89' style='mso-height-source:userset;height:66.75pt' id='r6'>
+              <td class='x74'>超过10万元至20万元的部分按2%交纳；</td>
+              </tr>
+              <tr height='89' style='mso-height-source:userset;height:66.75pt' id='r7'>
+              <td class='x74'>超过20万元至50万元的部分按1.5%交纳；</td>
+              </tr>
+              <tr height='89' style='mso-height-source:userset;height:66.75pt' id='r8'>
+              <td class='x74'>超过50万元至100万元的部分按1%交纳；</td>
+              </tr>
+              <tr height='89' style='mso-height-source:userset;height:66.75pt' id='r9'>
+              <td class='x74'>超过100万元至200万元的部分按0.9%交纳；</td>
+              </tr>
+              <tr height='89' style='mso-height-source:userset;height:66.75pt' id='r10'>
+              <td class='x74'>超过200万元至500万元的部分按0.8%交纳；</td>
+              </tr>
+              <tr height='89' style='mso-height-source:userset;height:66.75pt' id='r11'>
+              <td class='x74'>超过500万元至1000万元的部分按0.7%交纳；</td>
+              </tr>
+              <tr height='106' style='mso-height-source:userset;height:79.95pt' id='r12'>
+              <td class='x74'>超过1000万元至2000万元的部分按0.6%交纳；</td>
+              </tr>
+              <tr height='71' style='mso-height-source:userset;height:53.55pt' id='r13'>
+              <td class='x74'>超过2000万元的部分按0.5%交纳。</td>
+              </tr>
+              <tr height='71' style='mso-height-source:userset;height:53.55pt' id='r14'>
+              <td class='x74'>二、非财产案件按照下列标准交纳：</td>
+              </tr>
+              <tr height='546' style='mso-height-source:userset;height:409.5pt' id='r15'>
+              <td class='x74'>（一）离婚案件每件交纳200元。涉及财产分割，财产总额不超过20万元的，不另行交纳；超过20万元的部分，按照0.5％交纳。                                                 （二）侵害姓名权、名称权、肖像权、名誉权、荣誉权以及其他人格权的案件，每件交纳300元。涉及损害赔偿，赔偿金额不超过5万元的，不另行交纳；超过5万元至10万元的部分，按照1％交纳；超过10万元的部分，按照0.5％交纳。                            </td>
+              </tr>
+              <tr height='353' style='mso-height-source:userset;height:264.75pt' id='r16'>
+              <td class='x74'>（三）其他非财产案件每件交纳80元。                    三、知识产权民事案件，没有争议金额或者价额的，每件交纳1000元；有争议金额或者价额的，按照财产案件的标准交纳。</td>
+              </tr>
+              <tr height='71' style='mso-height-source:userset;height:53.55pt' id='r17'>
+              <td class='x74'>四、劳动争议案件每件交纳10元。</td>
+              </tr>
+              <tr height='71' style='mso-height-source:userset;height:53.55pt' id='r18'>
+              <td class='x74'>五、行政案件按照下列标准交纳：</td>
+              </tr>
+              <tr height='106' style='mso-height-source:userset;height:79.95pt' id='r19'>
+              <td class='x74'>（一）商标、专利、海事行政案件每件交纳100元；</td>
+              </tr>
+              <tr height='71' style='mso-height-source:userset;height:53.55pt' id='r20'>
+              <td class='x74'>（二）其他行政案件每件交纳50元。</td>
+              </tr>
+              <tr height='141' style='mso-height-source:userset;height:106.35pt' id='r21'>
+              <td class='x75'>六、当事人提出案件管辖权异议，异议不成立的，每件交纳80元。</td>
+              </tr>
+              <tr height='90' style='mso-height-source:userset;height:67.5pt' id='r22'>
+              <td rowspan='11' height='2454' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1840.8pt;'>湖北省高级人民法院</td>
+              <td rowspan='11' height='2454' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1840.8pt;'>全省各级人民法院</td>
+              <td rowspan='11' height='2454' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1840.8pt;'>法院</td>
+              <td rowspan='11' height='2454' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1840.8pt;'>申请费</td>
+              <td rowspan='11' height='2454' class='x71' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1840.8pt;'>行政事业性收费</td>
+              <td class='x76'></td>
+              <td class='x73'>一、申请执行的，按照下列标准交纳：</td>
+              <td rowspan='11' height='2454' class='x72' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1840.8pt;'>政府制定，制定部门为国务院。</td>
+              <td rowspan='11' height='2454' class='x72' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1840.8pt;'>《诉讼费用交纳办法》（国务院令第481号）</td>
+              <td rowspan='11' height='2454' class='x78' style='border-right:2px solid #DDDDDD;border-bottom:2px solid #DDDDDD;height:1840.8pt;'></td>
+              </tr>
+              <tr height='141' style='mso-height-source:userset;height:106.35pt' id='r23'>
+              <td class='x74'>当事人依法向人民法院申请下列事项，应当交纳申请费：                 </td>
+              <td class='x74'>（一）没有执行金额或者价额的，每件交纳50元至500元。</td>
+              </tr>
+              <tr height='458' style='mso-height-source:userset;height:343.95pt' id='r24'>
+              <td class='x74'>1.申请执行人民法院发生法律效力的判决、裁定、调解书，仲裁机构依法作出的裁决和调解书，公证机构依法赋予强制执行效力的债权文书；</td>
+              <td class='x74'>（二）执行金额或者价额不超过1万元的，每件交纳50元；超过1万元至50万元的部分，按照1.5％交纳；超过50万元至500万元的部分，按照1％交纳；超过500万元至1000万元的部分，按照0.5％交纳；超过1000万元的部分,按照0.1％交纳。</td>
+              </tr>
+              <tr height='141' style='mso-height-source:userset;height:106.35pt' id='r25'>
+              <td class='x74'>2.申请保全措施；</td>
+              <td class='x74'>二、申请保全措施的，根据实际保全的财产数额按照下列标准交纳：</td>
+              </tr>
+              <tr height='458' style='mso-height-source:userset;height:343.95pt' id='r26'>
+              <td class='x74'>3.申请支付令；</td>
+              <td class='x74'>财产数额不超过1000元或者不涉及财产数额的，每件交纳30元；超过1000元至10万元的部分，按照1%交纳；超过10万元的部分，按照0.5％交纳。但是，当事人申请保全措施交纳的费用最多不超过5000元。                    </td>
+              </tr>
+              <tr height='124' style='mso-height-source:userset;height:93.15pt' id='r27'>
+              <td class='x74'>4.申请公示催告；</td>
+              <td class='x74'>三、依法申请支付令的，比照财产案件受理费标准的1/3交纳。</td>
+              </tr>
+              <tr height='89' style='mso-height-source:userset;height:66.75pt' id='r28'>
+              <td class='x74'>5.申请撤销仲裁裁决或者认定仲裁协议效力；</td>
+              <td class='x74'>四、依法申请公示催告的，每件交纳100元。</td>
+              </tr>
+              <tr height='141' style='mso-height-source:userset;height:106.35pt' id='r29'>
+              <td class='x74'>6.申请破产；</td>
+              <td class='x74'>五、申请撤销仲裁裁决或者认定仲裁协议效力的，每件交纳400元。</td>
+              </tr>
+              <tr height='212' style='mso-height-source:userset;height:159.15pt' id='r30'>
+              <td class='x74'>7.申请海事强制令、共同海损理算、设立海事赔偿责任限制基金、海事债权登记、船舶优先权催告；</td>
+              <td class='x74'>六、破产案件依据破产财产总额计算，按照财产案件受理费标准减半交纳，但是，最高不超过30万元。</td>
+              </tr>
+              <tr height='124' style='mso-height-source:userset;height:93.15pt' id='r31'>
+              <td class='x74'>8.申请承认和执行外国法院判决、裁定和国外仲裁机构裁决。</td>
+              <td class='x74'>七、海事案件的申请费按照下列标准交纳：</td>
+              </tr>
+              <tr height='476' style='mso-height-source:userset;height:357.15pt' id='r32'>
+              <td class='x77'></td>
+              <td class='x75'>申请设立海事赔偿责任限制基金的，每件交纳1000元至1万元；申请海事强制令的，每件交纳1000元至5000元；申请船舶优先权催告的，每件交纳1000元至5000元；申请海事债权登记的，每件交纳1000元；申请共同海损理算的，每件交纳1000元。</td>
+              </tr>
+              <![if supportMisalignedColumns]>
+              <tr height='0' style='display:none'>
+                <td width='71' style='width:53.25pt'></td>
+                <td width='71' style='width:53.25pt'></td>
+                <td width='71' style='width:53.25pt'></td>
+                <td width='71' style='width:53.25pt'></td>
+                <td width='71' style='width:53.25pt'></td>
+                <td width='71' style='width:53.25pt'></td>
+                <td width='271' style='width:203.25pt'></td>
+                <td width='71' style='width:53.25pt'></td>
+                <td width='71' style='width:53.25pt'></td>
+                <td width='71' style='width:53.25pt'></td>
+              </tr>
+              <![endif]>
+              </table>
+        </div>
+    </div>
+
+    <!-- 公共底部 -->
+    <div id="cm_footer"></div>
+    <!-- 公共侧边栏 -->
+    <div id="sideEdge"></div>
+    <script src="/common/js/plugins/jquery.min.js"></script>
+    <script src="/common/js/common_data.js?_v=20200723"></script>
+    <script src="/common/js/tools.js"></script>
+    <script src="/common/js/common_page.js"></script>
+    <script>
+
+        $(function () {
+            $("#cm_top").load("/common/layout/top/xysHeader.html");
+            $("#cm_footer").load("/common/layout/footer/xysFooter.html");
+            $('#sideEdge').load('/common/layout/toolbar/xysToolbar.html');//引入页面侧边栏
+        })
+    </script>
+</body>
+
+</html>

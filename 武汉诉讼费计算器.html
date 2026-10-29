@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="武汉诉讼费计算器：按国务院令第481号及湖北省现行标准，估算案件受理费、申请执行费、保全费、支付令申请费等。" />
+<meta name="theme-color" content="#152f52" />
+<title>武汉诉讼费计算器｜案件受理费、执行费、保全费即时估算</title>
+<style>
+:root{
+  --bg:#f3f5f8;
+  --panel:#ffffff;
+  --ink:#15263d;
+  --ink-2:#4f5f74;
+  --ink-3:#667386;
+  --line:#e2e8ef;
+  --line-2:#eef2f6;
+  --navy:#152f52;
+  --navy-2:#1d4068;
+  --brand:#1f4f7a;
+  --brand-soft:#eaf2f8;
+  --brand-line:#c9dcea;
+  --gold:#8f5e1c;
+  --gold-soft:#fbf4e7;
+  --gold-line:#ead6b1;
+  --green:#1f7a5c;
+  --green-soft:#e9f5f0;
+  --red:#b0443a;
+  --red-soft:#fbeceb;
+  --r:16px;
+  --shadow:0 1px 2px rgba(21,38,61,.04), 0 14px 34px -22px rgba(21,38,61,.32);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; padding:0;
+  background:var(--bg); color:var(--ink);
+  font:14px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(820px 420px at 8% -8%, #e5edf6 0, rgba(229,237,246,0) 62%),
+    radial-gradient(680px 380px at 96% 2%, #f7eedf 0, rgba(247,238,223,0) 58%);
+}
+button{font:inherit; cursor:pointer}
+button,select,input{font-family:inherit}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{
+  outline:3px solid rgba(31,79,122,.28); outline-offset:2px;
+}
+a{color:var(--brand)}
+.wrap{max-width:1200px; margin:0 auto; padding:0 22px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:sticky; top:0; z-index:30;
+  background:rgba(255,255,255,.92); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(226,232,239,.9);
+}
+.topbar-in{height:68px; display:flex; align-items:center; gap:13px}
+.brand{display:flex; align-items:center; gap:11px; min-width:0}
+.logo{
+  width:39px; height:39px; border-radius:11px; flex:none;
+  display:grid; place-items:center; color:#fff; font-weight:800; font-size:18px;
+  background:linear-gradient(145deg,#1c3d63,#10233d);
+  box-shadow:0 7px 16px -8px rgba(16,35,61,.75);
+  position:relative;
+}
+.logo::after{content:""; position:absolute; inset:5px; border:1px solid rgba(255,255,255,.22); border-radius:7px}
+.brand-txt{min-width:0}
+.brand-txt b{display:block; font-size:16px; letter-spacing:.2px; line-height:1.3; white-space:nowrap}
+.brand-txt span{display:block; font-size:11.5px; color:var(--ink-3); line-height:1.5; white-space:nowrap}
+.top-spacer{flex:1}
+.top-badge{
+  display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+  font-size:12px; color:var(--ink-2); background:#f6f8fb; border:1px solid var(--line);
+  border-radius:999px; padding:6px 12px;
+}
+.top-badge .dot{width:6px; height:6px; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px rgba(31,122,92,.12)}
+
+/* ---------- 页头引言 ---------- */
+.page-intro{
+  padding:29px 0 22px;
+  display:flex; align-items:flex-end; justify-content:space-between; gap:28px;
+}
+.kicker{
+  display:inline-flex; align-items:center; gap:7px;
+  color:var(--gold); font-size:11.5px; font-weight:750; letter-spacing:1.4px;
+  margin-bottom:7px;
+}
+.kicker::before{content:""; width:18px; height:1px; background:var(--gold); opacity:.75}
+.page-intro h1{
+  margin:0 0 7px; font-size:29px; line-height:1.32; letter-spacing:-.4px; font-weight:760;
+}
+.page-intro p{margin:0; color:var(--ink-2); font-size:13.5px; max-width:670px}
+.intro-side{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; padding-bottom:2px}
+.intro-chip{
+  font-size:11.5px; color:var(--ink-2); background:rgba(255,255,255,.72);
+  border:1px solid var(--line); border-radius:999px; padding:5px 10px; white-space:nowrap;
+}
+.intro-chip b{color:var(--ink); font-weight:650}
+
+/* ---------- 布局 ---------- */
+.layout{display:grid; grid-template-columns:minmax(0,1fr) 388px; gap:22px; align-items:start; padding-bottom:34px}
+.main-col{min-width:0; display:flex; flex-direction:column; gap:16px}
+.aside{position:sticky; top:86px; min-width:0; scroll-margin-top:96px}
+.card{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--shadow); overflow:hidden;
+}
+.card-head{
+  display:flex; align-items:flex-start; gap:11px; padding:16px 18px 13px;
+  border-bottom:1px solid var(--line-2);
+}
+.step{
+  width:25px; height:25px; border-radius:8px; flex:none;
+  display:grid; place-items:center; margin-top:1px;
+  background:var(--brand-soft); color:var(--brand); font-size:12px; font-weight:800;
+}
+.card-title{min-width:0; flex:1}
+.card-title h2{margin:0; font-size:15.5px; font-weight:720; letter-spacing:.1px; line-height:1.4}
+.card-title p{margin:2px 0 0; font-size:11.5px; color:var(--ink-3); line-height:1.55}
+.head-action{
+  border:1px solid var(--line); background:#fff; color:var(--ink-3); border-radius:8px;
+  font-size:11.5px; padding:5px 10px; white-space:nowrap; transition:.16s;
+}
+.head-action:hover{background:#f7f9fc; color:var(--ink)}
+.card-body{padding:17px 18px}
+
+/* ---------- 模式切换 ---------- */
+.mode-tabs{
+  display:grid; grid-template-columns:1fr 1fr; gap:5px; padding:4px;
+  background:#eff3f7; border:1px solid #e7edf4; border-radius:12px; margin-bottom:14px;
+}
+.mode-tab{
+  border:0; background:transparent; color:var(--ink-2); border-radius:9px;
+  padding:9px 10px; text-align:left; transition:.16s; line-height:1.35;
+}
+.mode-tab b{display:block; font-size:13px; font-weight:650}
+.mode-tab span{display:block; font-size:10.5px; color:var(--ink-3); margin-top:1px}
+.mode-tab:hover{color:var(--ink)}
+.mode-tab.on{background:#fff; color:var(--navy); box-shadow:0 2px 7px rgba(21,38,61,.1)}
+.mode-tab.on span{color:var(--brand)}
+.mode-tab.on b{font-weight:750}
+
+/* ---------- 类型卡片 ---------- */
+.cat-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px}
+.cat{
+  --cat:#315f8a; --cat-bg:#edf3f9;
+  position:relative; display:flex; align-items:flex-start; gap:9px;
+  min-height:68px; padding:10px 9px; text-align:left;
+  background:#fff; border:1px solid var(--line); border-radius:11px;
+  transition:border-color .16s, background .16s, box-shadow .16s, transform .16s;
+}
+.cat:hover{border-color:#c9d7e5; box-shadow:0 7px 18px -16px rgba(21,38,61,.4); transform:translateY(-1px)}
+.cat.on{border-color:var(--brand); background:#f8fbfd; box-shadow:0 0 0 2px rgba(31,79,122,.08)}
+.cat-ico{
+  width:30px; height:30px; border-radius:9px; flex:none;
+  display:grid; place-items:center; font-size:13px; font-weight:800;
+  color:var(--cat); background:var(--cat-bg);
+}
+.cat-txt{min-width:0; padding-top:1px}
+.cat-txt b{display:block; font-size:12.5px; font-weight:650; line-height:1.35; color:var(--ink); white-space:normal; word-break:break-word}
+.cat-txt small{display:block; font-size:10px; line-height:1.4; color:var(--ink-3); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.cat-check{
+  position:absolute; top:7px; right:7px; width:14px; height:14px; border-radius:50%;
+  display:grid; place-items:center; font-size:9px; font-weight:800;
+  color:#fff; background:var(--brand); opacity:0; transform:scale(.7); transition:.16s;
+}
+.cat.on .cat-check{opacity:1; transform:scale(1)}
+.tone-blue{--cat:#2b5f8e;--cat-bg:#eaf2f9}
+.tone-rose{--cat:#9d4c5e;--cat-bg:#faedf0}
+.tone-violet{--cat:#67508f;--cat-bg:#f1edf8}
+.tone-green{--cat:#35745b;--cat-bg:#eaf5f0}
+.tone-amber{--cat:#9a6a1e;--cat-bg:#fbf3e2}
+.tone-slate{--cat:#4f647a;--cat-bg:#eef2f6}
+.tone-teal{--cat:#2d7272;--cat-bg:#e8f5f4}
+.tone-stone{--cat:#6b6258;--cat-bg:#f3f0eb}
+.tone-navy{--cat:#274d78;--cat-bg:#eaf0f7}
+.tone-copper{--cat:#8b5c30;--cat-bg:#f8efe5}
+
+/* ---------- 表单 ---------- */
+.form-area{display:flex; flex-direction:column; gap:15px}
+.amount-field{display:flex; flex-direction:column; gap:7px}
+.amount-label-row{display:flex; align-items:baseline; gap:8px}
+.amount-label-row label{font-size:12.5px; font-weight:650; color:var(--ink-2)}
+.amount-label-row .optional{font-size:10.5px; color:var(--ink-3); background:#f5f7fa; border:1px solid var(--line); padding:1px 6px; border-radius:999px}
+.amount-wrap{
+  display:flex; align-items:center; height:54px; padding:0 13px;
+  border:1px solid #d5dee8; border-radius:11px; background:#fff;
+  transition:border-color .16s, box-shadow .16s;
+}
+.amount-wrap:focus-within{border-color:var(--brand); box-shadow:0 0 0 4px rgba(31,79,122,.1)}
+.amount-prefix{font-size:20px; color:var(--ink-3); margin-right:7px; font-weight:500}
+.amount-wrap input{
+  flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent;
+  font-size:24px; font-weight:680; color:var(--ink); letter-spacing:.2px;
+  font-variant-numeric:tabular-nums;
+}
+.amount-wrap input::placeholder{font-size:14px; font-weight:400; color:#aab4c1; letter-spacing:0}
+.amount-wrap input.invalid{color:var(--red)}
+.amount-suffix{font-size:12px; color:var(--ink-3); margin-left:7px}
+.quick-row{display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding-top:1px}
+.quick-row>span{font-size:10.5px; color:var(--ink-3); margin-right:1px}
+.quick{
+  border:1px solid var(--line); background:#fafbfd; color:var(--ink-2);
+  border-radius:999px; padding:3px 9px; font-size:11px; line-height:1.5; transition:.15s;
+}
+.quick:hover{border-color:var(--brand-line); background:var(--brand-soft); color:var(--brand)}
+.hint{margin:0; font-size:11px; line-height:1.65; color:var(--ink-3)}
+.hint b{color:var(--ink-2); font-weight:600}
+.form-note{
+  display:flex; gap:8px; align-items:flex-start; padding:10px 12px;
+  background:#f7fafc; border:1px solid #e8eff5; border-radius:10px;
+  color:var(--ink-2); font-size:11.5px; line-height:1.65;
+}
+.form-note .ico{
+  width:16px; height:16px; border-radius:50%; flex:none; margin-top:1px;
+  display:grid; place-items:center; background:var(--brand-soft); color:var(--brand);
+  font-size:9px; font-weight:800; font-style:normal;
+}
+.form-note.warm{background:var(--gold-soft); border-color:var(--gold-line); color:#725426}
+.form-note.warm .ico{background:#f3e2c3; color:#8a6126}
+.form-note.green{background:var(--green-soft); border-color:#cfe8dd; color:#28614e}
+.form-note.green .ico{background:#d8eee5; color:var(--green)}
+
+.inline-choice{display:flex; flex-direction:column; gap:7px}
+.inline-label{font-size:12.5px; color:var(--ink-2); font-weight:600}
+.seg{
+  display:inline-flex; width:100%; background:#f1f5f8; border:1px solid #e4ebf2;
+  border-radius:10px; padding:3px; gap:3px;
+}
+.seg button{
+  flex:1; border:0; background:transparent; color:var(--ink-2); border-radius:7px;
+  padding:7px 8px; font-size:11.5px; line-height:1.4; transition:.15s;
+}
+.seg button:hover{color:var(--ink)}
+.seg button.on{background:#fff; color:var(--navy); font-weight:650; box-shadow:0 1px 4px rgba(21,38,61,.13)}
+.seg button small{display:block; font-size:9.5px; font-weight:400; color:var(--ink-3); margin-top:1px}
+.seg button.on small{color:var(--brand)}
+
+.flat-fee{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  background:linear-gradient(180deg,#fbfcfe,#f6f9fc); border:1px solid #e5edf5;
+  border-radius:11px; padding:14px 15px;
+}
+.flat-fee .flat-kicker{font-size:11.5px; color:var(--ink-3); min-width:64px}
+.flat-fee strong{font-size:28px; line-height:1; font-weight:750; color:var(--navy); letter-spacing:-.4px; font-variant-numeric:tabular-nums}
+.flat-fee p{margin:0 0 0 auto; font-size:11.5px; color:var(--ink-2); max-width:58%; line-height:1.55}
+
+.counterclaim-box{
+  border:1px solid #e6e0d2; border-radius:11px; padding:11px 13px 10px;
+  background:#fffdf8;
+}
+.check-line{display:flex; align-items:flex-start; gap:9px; cursor:pointer; font-size:12.5px; line-height:1.5}
+.check-line input{width:16px; height:16px; margin:2px 0 0; accent-color:var(--brand); flex:none; cursor:pointer}
+.check-line b{display:block; font-weight:650; color:var(--ink)}
+.check-line small{display:block; font-size:10.5px; color:var(--ink-3); margin-top:1px}
+.counterclaim-box .amount-field{margin-top:11px}
+.counterclaim-box .hint{margin-top:7px}
+
+.half-box{
+  border:1px dashed #d7e2ec; border-radius:11px; padding:12px 13px 11px;
+  background:#fbfcfe;
+}
+.half-top{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:7px}
+.half-top label{font-size:12.5px; font-weight:650; color:var(--ink-2)}
+.half-top .pill{font-size:10px; color:var(--gold); background:var(--gold-soft); border:1px solid var(--gold-line); border-radius:999px; padding:1px 7px}
+.select-wrap{position:relative}
+.select-wrap select{
+  width:100%; height:38px; border:1px solid #d8e1eb; border-radius:8px; background:#fff;
+  color:var(--ink); padding:0 34px 0 11px; font-size:12.5px; appearance:none; cursor:pointer;
+}
+.select-wrap::after{
+  content:""; position:absolute; right:13px; top:50%; width:7px; height:7px;
+  border-right:1.5px solid var(--ink-3); border-bottom:1.5px solid var(--ink-3);
+  transform:translateY(-65%) rotate(45deg); pointer-events:none;
+}
+.half-box .hint{margin-top:6px}
+
+.mini-formula{
+  display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
+  font-size:11.5px; color:var(--ink-2); padding:2px 0;
+}
+.mini-formula b{font-size:16px; color:var(--navy); font-weight:700}
+.mini-formula span{color:var(--ink-3); font-size:10.5px}
+
+/* ---------- 右侧结果 ---------- */
+.result-card{
+  background:#fff; border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--shadow); overflow:hidden;
+}
+.result-hero{
+  padding:17px 19px 18px;
+  color:#fff; background:
+    radial-gradient(360px 190px at 100% -20%, rgba(183,130,49,.28), transparent 65%),
+    linear-gradient(145deg,#173453,#10243d);
+  position:relative;
+}
+.result-top{display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:13px}
+.result-tag{
+  font-size:10.5px; font-weight:650; color:#fff; background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.17); border-radius:999px; padding:3px 9px;
+}
+.result-timing{
+  font-size:10.5px; color:#e8d6b7; background:rgba(183,130,49,.15);
+  border:1px solid rgba(222,190,136,.23); border-radius:999px; padding:3px 9px;
+}
+.result-label{font-size:11.5px; color:rgba(255,255,255,.62); margin-bottom:4px}
+.result-amount{
+  font-size:42px; line-height:1.12; font-weight:780; letter-spacing:-1.2px;
+  font-variant-numeric:tabular-nums; color:#fff; word-break:break-word;
+}
+.result-amount.range{font-size:35px; letter-spacing:-.5px}
+.result-amount.muted{color:rgba(255,255,255,.45); font-size:34px}
+.result-case{margin-top:8px; font-size:11.5px; color:rgba(255,255,255,.66); line-height:1.6}
+.result-discount{
+  margin:12px 0 0; padding:7px 10px; border-radius:8px;
+  background:rgba(183,130,49,.14); border:1px solid rgba(222,190,136,.22);
+  color:#efddbe; font-size:11px; line-height:1.55;
+}
+.result-discount b{color:#fff; font-weight:650}
+.result-body{padding:14px 19px 4px}
+.bd-head{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:4px}
+.bd-head h3{margin:0; font-size:11px; letter-spacing:.7px; color:var(--ink-3); font-weight:700}
+.bd-head span{font-size:9.5px; color:#a5afbb}
+.bd-list{display:flex; flex-direction:column}
+.bd-row{
+  display:flex; align-items:flex-start; gap:10px; padding:8px 0;
+  border-bottom:1px solid #f1f4f8;
+}
+.bd-row:last-child{border-bottom:0}
+.bd-row.adjust .bd-label{color:var(--green)}
+.bd-row.adjust .bd-amount{color:var(--green)}
+.bd-row.emphasis{background:#fbfcfe; margin:3px -6px 0; padding:8px 6px; border-radius:7px; border-bottom:0}
+.bd-row.zero{opacity:.62}
+.bd-copy{min-width:0; flex:1}
+.bd-label{display:block; font-size:11.5px; color:var(--ink); line-height:1.45}
+.bd-detail{display:block; font-size:10px; color:var(--ink-3); line-height:1.5; margin-top:1px; word-break:break-word}
+.bd-amount{
+  font-size:11.5px; font-weight:650; white-space:nowrap; color:var(--ink);
+  font-variant-numeric:tabular-nums; padding-top:1px;
+}
+.result-note{
+  margin:12px 0 0; padding:9px 11px; border-radius:9px;
+  background:#f8fafc; border:1px solid #e9eff5; color:var(--ink-2);
+  font-size:10.5px; line-height:1.7;
+}
+.result-note b{color:var(--ink); font-weight:650}
+.result-note.warn{background:#fffbf3; border-color:#f1e3c9; color:#73572a}
+.result-exclude{
+  margin:9px 0 0; font-size:10px; line-height:1.6; color:var(--ink-3);
+}
+.result-actions{display:flex; gap:7px; padding:12px 19px 14px; flex-wrap:wrap}
+.btn{
+  border:1px solid var(--brand); background:var(--brand); color:#fff;
+  border-radius:9px; padding:8px 12px; font-size:11.5px; font-weight:650;
+  transition:.15s; flex:1; min-width:84px;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:#fff; color:var(--ink-2); border-color:var(--line); flex:0 0 auto}
+.btn.ghost:hover{background:#f7f9fc; color:var(--ink); filter:none}
+.btn:disabled{opacity:.45; cursor:not-allowed; filter:none}
+.result-foot{
+  padding:10px 19px 13px; border-top:1px solid var(--line-2); background:#fcfdfe;
+  font-size:10px; line-height:1.65; color:var(--ink-3);
+}
+.mini-card{
+  margin-top:10px; padding:11px 14px; border:1px solid var(--line);
+  border-radius:11px; background:rgba(255,255,255,.72); color:var(--ink-3);
+  font-size:10.5px; line-height:1.7;
+}
+.mini-card b{color:var(--ink-2); font-weight:600}
+.mini-card a{text-decoration:none; border-bottom:1px solid #c9d8e6; color:var(--brand)}
+.mini-card a:hover{border-bottom-color:var(--brand)}
+
+/* ---------- 下方说明 ---------- */
+.notes-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+.note-card{padding:16px 17px 15px}
+.note-card h3{margin:0 0 8px; font-size:12.5px; font-weight:720; color:var(--ink)}
+.note-card p{margin:0; font-size:11.5px; line-height:1.7; color:var(--ink-2)}
+.note-card p+p{margin-top:6px}
+.note-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px}
+.note-list li{display:flex; gap:8px; align-items:flex-start; font-size:11.5px; line-height:1.6; color:var(--ink-2)}
+.note-list .n{
+  width:17px; height:17px; border-radius:6px; background:#f1f5f9; color:var(--brand);
+  display:grid; place-items:center; font-size:9px; font-weight:800; flex:none; margin-top:2px;
+}
+.note-list b{color:var(--ink); font-weight:600}
+.link-out{font-size:11px; color:var(--brand); text-decoration:none; white-space:nowrap}
+.link-out:hover{text-decoration:underline}
+
+.faq-card{padding:0}
+.faq-card summary{
+  list-style:none; cursor:pointer; padding:13px 17px; display:flex; align-items:center; gap:9px;
+  font-size:12px; font-weight:650; color:var(--ink); border-bottom:1px solid var(--line-2);
+}
+.faq-card summary::-webkit-details-marker{display:none}
+.faq-card summary::after{content:"+"; margin-left:auto; font-size:16px; font-weight:400; color:var(--ink-3); line-height:1}
+.faq-card details[open] summary::after{content:"−"}
+.faq-card .faq-body{padding:11px 17px 13px; font-size:11.5px; line-height:1.75; color:var(--ink-2)}
+.faq-card details+details summary{border-top:1px solid var(--line-2)}
+.faq-card summary .qmark{
+  width:18px; height:18px; border-radius:50%; background:#f4f7fa; color:var(--ink-3);
+  display:grid; place-items:center; font-size:10px; font-weight:700; flex:none;
+}
+
+/* ---------- 页脚 ---------- */
+.foot{border-top:1px solid var(--line); background:rgba(255,255,255,.6); margin-top:4px}
+.foot-in{max-width:1200px; margin:0 auto; padding:22px 22px 30px; display:grid; grid-template-columns:1.2fr 1fr; gap:24px}
+.foot h4{margin:0 0 7px; font-size:11px; color:var(--ink-2); letter-spacing:.4px}
+.foot p,.foot li{margin:0; font-size:10.5px; line-height:1.8; color:var(--ink-3)}
+.foot ul{list-style:none; margin:0; padding:0}
+.foot a{color:var(--ink-2); text-decoration:none}
+.foot a:hover{color:var(--brand); text-decoration:underline}
+.foot .disclaimer{background:#fbfcfd; border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-top:9px}
+.foot .disclaimer b{color:var(--ink-2)}
+
+/* ---------- 移动端浮条 ---------- */
+.float{display:none}
+.toast{
+  position:fixed; left:50%; bottom:25px; transform:translate(-50%,12px); z-index:80;
+  background:#13263f; color:#fff; border:1px solid rgba(255,255,255,.13);
+  border-radius:10px; padding:9px 14px; font-size:11.5px; line-height:1.5;
+  box-shadow:0 12px 30px -12px rgba(0,0,0,.45); opacity:0; pointer-events:none;
+  transition:opacity .2s, transform .2s; max-width:calc(100vw - 32px);
+}
+.toast.show{opacity:1; transform:translate(-50%,0)}
+
+/* ---------- 打印 ---------- */
+.print-only{display:none}
+@media print{
+  @page{size:A4; margin:14mm}
+  body{background:#fff; color:#000; font-size:12px; padding-bottom:0!important}
+  body::before{display:none}
+  .topbar,.page-intro,.main-col,.float,.toast,.foot,.mini-card,.result-actions{display:none!important}
+  .wrap{max-width:none; padding:0}
+  .layout{display:block; padding:0; margin:0}
+  .aside{position:static}
+  .result-card{border:0; box-shadow:none; border-radius:0}
+  .result-hero{background:#fff!important; color:#000; padding:0 0 12px; border-bottom:2px solid #111}
+  .result-tag,.result-timing{color:#000!important; background:#f4f4f4!important; border:1px solid #aaa!important}
+  .result-label,.result-case{color:#333!important}
+  .result-amount{color:#000!important; font-size:38px}
+  .result-discount{background:#f5f5f5!important; border:1px solid #bbb!important; color:#000!important}
+  .result-body{padding:12px 0 0}
+  .bd-row{border-color:#ddd!important}
+  .bd-label{font-size:11px; color:#000}
+  .bd-detail{color:#555}
+  .bd-amount{color:#000}
+  .result-note{background:#f7f7f7!important; border:1px solid #ccc!important; color:#222!important}
+  .result-foot{background:#fff!important; border-top:1px solid #999!important; color:#333!important}
+  .print-only{display:block!important}
+  .print-head{padding:0 0 14px; border-bottom:1px solid #999; margin-bottom:15px}
+  .print-head .print-brand{font-size:10px; letter-spacing:2px; color:#555; margin-bottom:4px}
+  .print-head h2{font-size:21px; margin:0 0 3px; font-weight:750}
+  .print-head p{margin:0; font-size:10px; color:#555}
+  .result-card{page-break-inside:avoid}
+}
+
+@media (min-width:1121px){
+  .result-card{
+    max-height:calc(100vh - 102px); overflow:auto;
+    scrollbar-width:thin; scrollbar-color:#c8d4e2 transparent;
+  }
+  .result-card::-webkit-scrollbar{width:6px}
+  .result-card::-webkit-scrollbar-thumb{background:#c8d4e2; border-radius:999px}
+  .result-card::-webkit-scrollbar-track{background:transparent}
+  .result-actions{
+    position:sticky; bottom:0; z-index:2; background:#fff;
+    box-shadow:0 -1px 0 var(--line-2);
+  }
+}
+@media (max-width:1120px){
+  .page-intro{flex-direction:column; align-items:flex-start; gap:11px}
+  .intro-side{justify-content:flex-start}
+  .layout{display:flex; flex-direction:column; gap:16px; align-items:stretch}
+  .main-col{display:contents}
+  #pickCard{order:1}
+  #formCard{order:2}
+  .aside{order:3; position:static; scroll-margin-top:80px}
+  .notes-grid{order:4}
+  .faq-card{order:5}
+  .result-card,.mini-card{max-width:none}
+}
+@media (max-width:820px){
+  .page-intro{align-items:flex-start; flex-direction:column; gap:11px; padding:22px 0 17px}
+  .page-intro h1{font-size:25px}
+  .intro-side{justify-content:flex-start}
+  .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .notes-grid{grid-template-columns:1fr}
+  .foot-in{grid-template-columns:1fr; gap:16px}
+  .result-card,.mini-card{max-width:none}
+  .float{
+    display:flex; position:fixed; left:0; right:0; bottom:0; z-index:40;
+    background:rgba(255,255,255,.96); backdrop-filter:blur(10px);
+    border-top:1px solid var(--line); padding:9px 16px calc(9px + env(safe-area-inset-bottom));
+    align-items:center; gap:12px;
+  }
+  .float-copy{min-width:0; flex:1}
+  .float-copy span{display:block; font-size:10px; color:var(--ink-3); line-height:1.3}
+  .float-copy b{display:block; font-size:18px; color:var(--brand); line-height:1.35; font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .float .btn{flex:0 0 auto; min-width:74px; padding:8px 11px}
+  body{padding-bottom:64px}
+}
+@media (max-width:560px){
+  .wrap{padding:0 14px}
+  .topbar-in{height:61px; gap:9px}
+  .aside{scroll-margin-top:72px}
+  .brand-txt b{font-size:14px}
+  .brand-txt span{font-size:10px}
+  .top-badge{display:none}
+  .page-intro h1{font-size:22px}
+  .page-intro p{font-size:12.5px}
+  .card-head{padding:14px 14px 11px}
+  .card-body{padding:14px}
+  .cat-grid{gap:7px}
+  .cat{min-height:64px; padding:9px 8px; gap:7px}
+  .cat-ico{width:27px; height:27px; font-size:12px; border-radius:8px}
+  .cat-txt b{font-size:11.5px}
+  .cat-txt small{font-size:9.5px}
+  .amount-wrap{height:52px}
+  .amount-wrap input{font-size:22px}
+  .flat-fee p{max-width:100%; margin-left:0}
+  .flat-fee strong{font-size:25px}
+  .result-hero{padding:15px 15px 16px}
+  .result-amount{font-size:37px}
+  .result-amount.range{font-size:30px}
+  .result-body{padding:13px 15px 2px}
+  .result-actions{padding:11px 15px 13px}
+  .result-foot{padding:9px 15px 12px}
+  .mode-tab{padding:8px 8px}
+  .mode-tab b{font-size:12px}
+  .mode-tab span{font-size:9.5px}
+  .half-box{padding:11px}
+}
+</style>
+</head>
+<body>
+<noscript><div class="wrap" style="padding-top:14px;padding-bottom:14px;color:#b0443a;font-size:13px">本计算器需要启用 JavaScript 才能计算；请用浏览器打开并允许脚本运行。</div></noscript>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">诉</div>
+      <div class="brand-txt">
+        <b>武汉诉讼费计算器</b>
+        <span>湖北标准 · 武汉法院适用</span>
+      </div>
+    </div>
+    <div class="top-spacer"></div>
+    <div class="top-badge"><span class="dot" aria-hidden="true"></span>数据核验 2026-10-28</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="page-intro">
+    <div>
+      <div class="kicker">WUHAN LITIGATION FEE</div>
+      <h1>打官司，先算清这笔钱</h1>
+      <p>选择案件类型，填入金额，即时估算案件受理费或申请费。依据国务院令第481号与湖北省现行收费标准，覆盖武汉各级法院常见民事、行政、执行、保全场景。</p>
+    </div>
+    <div class="intro-side" aria-label="工具特点">
+      <span class="intro-chip"><b>14</b> 类常见费用</span>
+      <span class="intro-chip"><b>减半</b> 不叠加</span>
+      <span class="intro-chip"><b>离线</b> 可直接打开</span>
+    </div>
+  </section>
+
+  <div class="layout">
+    <div class="main-col">
+      <section class="card" id="pickCard" aria-labelledby="pickTitle">
+        <div class="card-head">
+          <div class="step" aria-hidden="true">1</div>
+          <div class="card-title">
+            <h2 id="pickTitle">选择案件类型</h2>
+            <p>不知道选哪类？先看“谁告谁、要什么”，再选金额最接近的一项。</p>
+          </div>
+          <button type="button" class="head-action" id="resetBtn">重置</button>
+        </div>
+        <div class="card-body">
+          <div class="mode-tabs" role="tablist" aria-label="费用类型">
+            <button type="button" class="mode-tab on" id="tabCase" role="tab" aria-selected="true" aria-controls="catGrid">
+              <b>起诉 / 上诉</b><span>案件受理费</span>
+            </button>
+            <button type="button" class="mode-tab" id="tabApply" role="tab" aria-selected="false" aria-controls="catGrid">
+              <b>申请事项</b><span>执行、保全、支付令等申请费</span>
+            </button>
+          </div>
+          <div class="cat-grid" id="catGrid" role="group" aria-label="案件类型列表"></div>
+        </div>
+      </section>
+
+      <section class="card" id="formCard" aria-labelledby="formTitle">
+        <div class="card-head">
+          <div class="step" aria-hidden="true">2</div>
+          <div class="card-title">
+            <h2 id="formTitle">填写金额与情形</h2>
+            <p id="formSub">金额可改，右侧结果实时更新。</p>
+          </div>
+          <span class="top-badge" style="padding:4px 9px;font-size:10px">实时计算</span>
+        </div>
+        <div class="card-body">
+          <div class="form-area" id="formBody"></div>
+        </div>
+      </section>
+
+      <div class="notes-grid">
+        <section class="card note-card">
+          <h3>在武汉立案，先分清这 3 笔钱</h3>
+          <ul class="note-list">
+            <li><span class="n">1</span><span><b>案件受理费：</b>交给法院，通常由原告、上诉人或申请人预交；最终一般由败诉方负担。</span></li>
+            <li><span class="n">2</span><span><b>申请费：</b>执行、保全、支付令等单独收取，和案件受理费是两笔钱。</span></li>
+            <li><span class="n">3</span><span><b>其他费用：</b>鉴定、公告、评估、律师费等不在本工具内，通常也不属于“诉讼费”。</span></li>
+          </ul>
+        </section>
+        <section class="card note-card">
+          <h3>预交 ≠ 最终承担</h3>
+          <p>案件受理费一般由败诉方负担；部分胜诉、部分败诉的，由法院根据具体情况决定双方各自负担的数额。</p>
+          <p>调解结案的，由双方协商；协商不成，由法院决定。胜诉方预交但不应负担的费用，可依法申请退还，由败诉方交纳。申请费（执行、保全、支付令等）按各自规则负担。</p>
+          <p style="margin-top:9px"><a class="link-out" href="https://www.gov.cn/zhengce/zhengceku/2008-03/28/content_6929.htm" target="_blank" rel="noopener">查看《诉讼费用交纳办法》全文 →</a></p>
+        </section>
+      </div>
+
+      <section class="card faq-card" aria-labelledby="faqTitle">
+        <div class="card-head" style="border-bottom:1px solid var(--line-2)">
+          <div class="step" aria-hidden="true">?</div>
+          <div class="card-title">
+            <h2 id="faqTitle">常见问题</h2>
+            <p>武汉法院实务中最容易弄错的几个点。</p>
+          </div>
+        </div>
+        <details>
+          <summary><span class="qmark">Q</span>简易程序减半后，调解结案还能再减半吗？</summary>
+          <div class="faq-body">不能。《最高人民法院关于适用〈中华人民共和国民事诉讼法〉的解释》第二百零六条规定：人民法院决定减半收取案件受理费的，只能减半一次。本诉中简易程序、调解结案、撤诉等情形同时出现，只减一次。反诉 / 有独立请求权第三人另按第18条单独计费后减半，是本诉之外的另一份受理费。</div>
+        </details>
+        <details>
+          <summary><span class="qmark">Q</span>为什么 10 万元财产案件不是按 2.5% 直接乘？</summary>
+          <div class="faq-body">财产案件是“分段累计”，不是全额乘一个比例。10 万元 = 1 万元以内 50 元 + 超过 1 万至 10 万元的 9 万元 × 2.5%，合计 2,300 元。超过 10 万元的部分再进入下一档。</div>
+        </details>
+        <details>
+          <summary><span class="qmark">Q</span>离婚案件涉及房产，按财产案件算吗？</summary>
+          <div class="faq-body">不按财产案件全额分段算。湖北标准是离婚案件每件 200 元；涉及财产分割的，财产总额不超过 20 万元不另收，超过 20 万元的部分按 0.5% 加收。</div>
+        </details>
+        <details>
+          <summary><span class="qmark">Q</span>执行申请费要先交吗？</summary>
+          <div class="faq-body">通常不需要。申请执行费不由申请人预交，执行后交纳，由被执行人负担。执行中双方达成和解的，申请费负担由双方协商；协商不成由法院决定。</div>
+        </details>
+        <details>
+          <summary><span class="qmark">Q</span>保全费最多多少钱？</summary>
+          <div class="faq-body">申请保全费按实际保全的财产数额分段计算，但当事人申请保全措施交纳的费用最多不超过 5,000 元。保全费一般由申请人负担，起诉时可以将该费用列入诉讼请求。</div>
+        </details>
+        <details>
+          <summary><span class="qmark">Q</span>诉讼费可以缓交、减交或免交吗？</summary>
+          <div class="faq-body">符合司法救助条件的，可以向法院申请缓交、减交或免交，并提交书面申请及经济困难证明等材料。免交只适用于自然人；减交比例不得低于 30%。是否准许由法院审查决定，本工具不自动扣减。</div>
+        </details>
+      </section>
+    </div>
+
+    <aside class="aside" id="aside" aria-label="费用估算结果">
+      <section class="result-card" id="resultCard">
+        <div class="print-only print-head">
+          <div class="print-brand">武汉诉讼费计算器 · 估算单</div>
+          <h2>诉讼费估算结果</h2>
+          <p>估算时间：<span id="printDate">—</span> · 数据基准：2026-10-28</p>
+          <p>依据：国务院令第481号 · 鄂价费〔2008〕5号</p>
+        </div>
+        <div class="result-hero">
+          <div class="result-top">
+            <span class="result-tag" id="resultTag">案件受理费</span>
+            <span class="result-timing" id="resultTiming">立案时预交</span>
+          </div>
+          <div class="result-label" id="resultLabel">预计需交纳</div>
+          <div class="result-amount" id="resultAmount" aria-live="polite">¥2,300</div>
+          <div class="result-case" id="resultCase" aria-live="polite">财产案件 · 诉讼请求 100,000 元</div>
+          <div class="result-discount" id="discountBox" hidden></div>
+        </div>
+        <div class="result-body">
+          <div class="bd-head"><h3>计算明细</h3><span>分档四舍五入 · 以合计为准</span></div>
+          <div class="bd-list" id="breakdown"></div>
+          <div class="result-note" id="resultNote"><b>提示：</b>二审上诉的，按不服一审判决部分的金额计算。</div>
+          <p class="result-exclude">不含律师费、鉴定费、公告费、评估费、差旅费等；实际金额以法院缴费通知书为准。</p>
+        </div>
+        <div class="result-actions">
+          <button type="button" class="btn" id="copyBtn">复制明细</button>
+          <button type="button" class="btn" id="printBtn">打印 / 存 PDF</button>
+          <button type="button" class="btn ghost" id="resetBtn2">重置</button>
+        </div>
+        <div class="result-foot">预交不等于最终承担：案件受理费一般由败诉方负担；申请费按执行、保全、支付令等各自规则负担。具体以裁判文书和缴费通知为准。</div>
+      </section>
+      <div class="mini-card">
+        <b>口径：</b>武汉中院及各区法院执行湖北省统一收费标准。数据基准 2026-10-28，依据国务院令第481号、鄂价费〔2008〕5号。结果保留到分，法院可能按元取整。
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <h4>依据与核验</h4>
+      <ul>
+        <li><a href="https://www.gov.cn/zhengce/zhengceku/2008-03/28/content_6929.htm" target="_blank" rel="noopener">《诉讼费用交纳办法》（国务院令第481号）</a></li>
+        <li><a href="https://zwfw.hubei.gov.cn/webview/zwgk/sfqd/420000SF/sfqd_23.html" target="_blank" rel="noopener">湖北政务服务网 · 全省法院综合性收费目录清单</a></li>
+        <li><a href="http://fgw.hubei.gov.cn/fgjj/ztzl/zl/2023/jgfw/zc_78952/sfsf/202311/P020260306708963451595.pdf" target="_blank" rel="noopener">鄂价费〔2008〕5号（湖北省部分诉讼费标准）</a></li>
+        <li><a href="https://www.court.gov.cn/zixun/xiangqing/353651.html" target="_blank" rel="noopener">民诉法解释（2022修正）· 第206条</a></li>
+        <li><a href="http://whzy.hbfy.gov.cn/" target="_blank" rel="noopener">武汉市中级人民法院</a> · 诉讼服务热线 12368</li>
+      </ul>
+      <div class="disclaimer"><b>免责声明：</b>本工具是诉讼费估算工具，不是法院官方缴费通知，也不构成法律意见。案件类型、标的额、程序适用、司法救助等都会影响最终金额，请以受理法院出具的缴费通知书为准。</div>
+    </div>
+    <div>
+      <h4>使用提示</h4>
+      <p>1. 先用“起诉 / 上诉”算案件受理费，再切到“申请事项”另算执行费、保全费等；两者通常相加才是完整预算。</p>
+      <p>2. 金额填起诉时主张的总额；上诉的，填不服一审判决的部分。</p>
+      <p>3. 本诉调解、撤诉或适用简易程序可减半，但同一份本诉受理费只能减一次；反诉 / 第三人按第18条另行单独计费后减半。</p>
+      <p>4. 本工具为单文件离线网页，数据与命令行工具同源；修改费率请优先改 HTML 内“基础数据” DATA，并同步检查页面文案与测试。</p>
+    </div>
+  </div>
+</footer>
+
+<div class="float" id="floatBar">
+  <div class="float-copy"><span id="floatLabel">预计案件受理费</span><b id="floatAmount">¥2,300</b></div>
+  <button type="button" class="btn" id="lookBtn">看明细</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script id="fee-engine">
+/* ===== 一、基础数据 ===== */
+const DATA = Object.freeze({
+  version: '2026-10-28',
+  law: '《诉讼费用交纳办法》（国务院令第481号）',
+  localStandard: '鄂价费〔2008〕5号',
+  property: [
+    { from: 0,       to: 10000,     flat: 50,  label: '不超过1万元',       basis: '每件50元' },
+    { from: 10000,   to: 100000,    rate: 0.025, label: '1万–10万元部分' },
+    { from: 100000,  to: 200000,    rate: 0.02,  label: '10万–20万元部分' },
+    { from: 200000,  to: 500000,    rate: 0.015, label: '20万–50万元部分' },
+    { from: 500000,  to: 1000000,   rate: 0.01,  label: '50万–100万元部分' },
+    { from: 1000000, to: 2000000,   rate: 0.009, label: '100万–200万元部分' },
+    { from: 2000000, to: 5000000,   rate: 0.008, label: '200万–500万元部分' },
+    { from: 5000000, to: 10000000,  rate: 0.007, label: '500万–1000万元部分' },
+    { from: 10000000, to: 20000000, rate: 0.006, label: '1000万–2000万元部分' },
+    { from: 20000000, to: Infinity, rate: 0.005, label: '2000万元以上部分' }
+  ],
+  execution: [
+    { from: 0,       to: 10000,     flat: 50,  label: '不超过1万元',       basis: '每件50元' },
+    { from: 10000,   to: 500000,    rate: 0.015, label: '1万–50万元部分' },
+    { from: 500000,  to: 5000000,   rate: 0.01,  label: '50万–500万元部分' },
+    { from: 5000000, to: 10000000,  rate: 0.005, label: '500万–1000万元部分' },
+    { from: 10000000, to: Infinity, rate: 0.001, label: '1000万元以上部分' }
+  ],
+  hubei: {
+    divorce: 200,
+    personality: 300,
+    otherNonProperty: 80,
+    ipNoAmount: 1000,
+    jurisdiction: 80
+  },
+  divorce: { propertyThreshold: 200000, propertyRate: 0.005 },
+  personality: {
+    threshold: 50000,
+    firstCap: 100000,
+    firstRate: 0.01,
+    rate: 0.005
+  },
+  administrative: { general: 50, special: 100 },
+  labor: { fee: 10 },
+  preservation: {
+    base: 30,
+    threshold: 1000,
+    firstCap: 100000,
+    firstRate: 0.01,
+    rate: 0.005,
+    cap: 5000
+  },
+  paymentOrder: { divisor: 3 },
+  publicNotice: { fee: 100 },
+  arbitration: { fee: 400 },
+  bankruptcy: { cap: 300000 },
+  executionNoAmount: { min: 50, max: 500 }
+});
+
+const CATEGORIES = {
+  property:      { name: '财产案件',       mode: 'case',        feeKind: '案件受理费', icon: '财', tone: 'blue',   hint: '借款、货款、合同、房产' },
+  divorce:       { name: '离婚案件',       mode: 'case',        feeKind: '案件受理费', icon: '婚', tone: 'rose',   hint: '离婚及财产分割' },
+  personality:   { name: '人格权案件',     mode: 'case',        feeKind: '案件受理费', icon: '人', tone: 'violet', hint: '名誉、肖像、隐私等' },
+  labor:         { name: '劳动争议',       mode: 'case',        feeKind: '案件受理费', icon: '劳', tone: 'green',  hint: '工资、工伤、辞退' },
+  ip:            { name: '知识产权民事案件', mode: 'case',      feeKind: '案件受理费', icon: '知', tone: 'amber',  hint: '商标、专利、著作权' },
+  administrative:{ name: '行政案件',       mode: 'case',        feeKind: '案件受理费', icon: '行', tone: 'slate',  hint: '民告官、行政复议后起诉' },
+  nonProperty:   { name: '其他非财产案件', mode: 'case',        feeKind: '案件受理费', icon: '其', tone: 'teal',   hint: '排除妨害、道歉等' },
+  jurisdiction:  { name: '管辖权异议',     mode: 'case',        feeKind: '案件受理费', icon: '辖', tone: 'stone',  hint: '异议不成立时交费' },
+  execution:     { name: '申请执行',       mode: 'application', feeKind: '申请费',     icon: '执', tone: 'navy',   hint: '强制执行判决、裁决' },
+  preservation:  { name: '财产保全',       mode: 'application', feeKind: '申请费',     icon: '保', tone: 'copper', hint: '查封、冻结、扣押' },
+  paymentOrder:  { name: '支付令',         mode: 'application', feeKind: '申请费',     icon: '令', tone: 'blue',   hint: '督促程序，追讨欠款' },
+  publicNotice:  { name: '公示催告',       mode: 'application', feeKind: '申请费',     icon: '公', tone: 'teal',   hint: '票据等事项' },
+  arbitration:   { name: '撤销仲裁裁决',   mode: 'application', feeKind: '申请费',     icon: '仲', tone: 'slate',  hint: '或认定仲裁协议效力' },
+  bankruptcy:    { name: '破产申请',       mode: 'application', feeKind: '申请费',     icon: '破', tone: 'amber',  hint: '企业破产清算' }
+};
+
+const CATEGORY_ORDER = {
+  case: ['property', 'divorce', 'personality', 'labor', 'ip', 'administrative', 'nonProperty', 'jurisdiction'],
+  application: ['execution', 'preservation', 'paymentOrder', 'publicNotice', 'arbitration', 'bankruptcy']
+};
+
+const HALF_REASONS = {
+  simple:     { label: '适用简易程序 / 小额诉讼', short: '简易程序' },
+  mediation:  { label: '调解结案',               short: '调解' },
+  withdrawal: { label: '申请撤诉',               short: '撤诉' }
+};
+
+/* ===== 二、纯计算函数 ===== */
+const NUM_FMT = new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 2, minimumFractionDigits: 0 });
+
+function round2(n) {
+  if (!Number.isFinite(n)) return NaN;
+  const sign = n < 0 ? -1 : 1;
+  return sign * Math.round((Math.abs(n) + Number.EPSILON) * 100) / 100;
+}
+
+function formatNum(n) {
+  if (!Number.isFinite(n)) return '—';
+  return NUM_FMT.format(round2(n));
+}
+
+function money(n) {
+  if (!Number.isFinite(n)) return '—';
+  return '¥' + formatNum(n);
+}
+
+function signedMoney(n) {
+  if (!Number.isFinite(n)) return '—';
+  return n < 0 ? '−' + money(Math.abs(n)) : money(n);
+}
+
+function formatPct(rate) {
+  return String(+(rate * 100).toFixed(4)) + '%';
+}
+
+function parseAmount(value) {
+  if (typeof value === 'number') return Number.isFinite(value) ? value : NaN;
+  if (value == null) return NaN;
+  let s = String(value).trim();
+  if (!s) return NaN;
+  s = s.replace(/[￥¥元]/g, '').replace(/[,，\s]/g, '');
+  const m = s.match(/^([+-]?\d+(?:\.\d+)?)\s*(万|w)?$/i);
+  if (!m) return NaN;
+  const n = parseAmount_base(m[1]);
+  if (!Number.isFinite(n)) return NaN;
+  return m[2] ? n * 10000 : n;
+}
+
+function parseAmount_base(s) {
+  const n = Number(s);
+  return Number.isFinite(n) ? n : NaN;
+}
+
+function progressive(amount, tiers) {
+  const lines = [];
+  let total = 0;
+  let prev = 0;
+  for (const t of tiers) {
+    if (amount <= prev) break;
+    const top = Math.min(amount, t.to);
+    const part = top - prev;
+    if (part > 0) {
+      const value = t.flat != null ? t.flat : part * t.rate;
+      total += value;
+      lines.push({
+        label: t.label,
+        detail: t.flat != null ? t.basis : formatNum(part) + ' × ' + formatPct(t.rate),
+        amount: round2(value)
+      });
+    }
+    prev = t.to;
+  }
+  return { total: round2(total), lines };
+}
+
+function propertyFee(amount) {
+  return progressive(amount, DATA.property);
+}
+
+function executionFee(amount) {
+  return progressive(amount, DATA.execution);
+}
+
+function preservationFee(amount) {
+  const P = DATA.preservation;
+  if (!(amount > P.threshold)) {
+    return {
+      total: P.base,
+      lines: [{ label: '保全金额不超过1,000元或不涉及金额', detail: '每件30元', amount: P.base }]
+    };
+  }
+  const lines = [{ label: '1,000元以内', detail: '每件30元', amount: P.base }];
+  let total = P.base;
+  if (amount > P.threshold) {
+    const top = Math.min(amount, P.firstCap);
+    const part = top - P.threshold;
+    const val = part * P.firstRate;
+    total += val;
+    lines.push({ label: '1,000元–10万元部分', detail: formatNum(part) + ' × ' + formatPct(P.firstRate), amount: round2(val) });
+  }
+  if (amount > P.firstCap) {
+    const part = amount - P.firstCap;
+    const val = part * P.rate;
+    total += val;
+    lines.push({ label: '10万元以上部分', detail: formatNum(part) + ' × ' + formatPct(P.rate), amount: round2(val) });
+  }
+  total = round2(total);
+  if (total > P.cap) {
+    lines.push({ label: '保全费封顶', detail: '最高不超过5,000元', amount: round2(P.cap - total), adjustment: true });
+    total = P.cap;
+  }
+  return { total, lines };
+}
+
+function buildCounterclaim(amount) {
+  const pf = propertyFee(amount);
+  const discountAmount = round2(pf.total / 2);
+  const fee = round2(pf.total - discountAmount);
+  return {
+    amount,
+    base: pf.total,
+    fee,
+    discountAmount,
+    lines: [
+      {
+        label: '反诉 / 有独立请求权第三人请求受理费',
+        detail: '按自己的请求金额单独适用财产案件标准：' + money(pf.total),
+        amount: pf.total,
+        section: 'counterclaim'
+      },
+      {
+        label: '反诉 / 第三人减半（第18条）',
+        detail: '单独计费后 ×50%，本诉仍按本诉金额计算',
+        amount: -discountAmount,
+        adjustment: true,
+        section: 'counterclaim'
+      }
+    ],
+    discount: {
+      key: 'counterclaim',
+      label: '第18条单独减半',
+      short: '反诉/第三人',
+      amount: discountAmount,
+      scope: 'counterclaim',
+      scopeLabel: '反诉/第三人'
+    }
+  };
+}
+
+function halfText(half) {
+  return half && HALF_REASONS[half] ? HALF_REASONS[half] : null;
+}
+
+function applyHalf(base, half) {
+  if (!half || !HALF_REASONS[half]) return { fee: round2(base), discount: null };
+  const discount = round2(base / 2);
+  return {
+    fee: round2(base - discount),
+    discount: {
+      key: half,
+      label: HALF_REASONS[half].label,
+      short: HALF_REASONS[half].short,
+      amount: discount
+    }
+  };
+}
+
+function invalid(message) {
+  return { ok: false, error: message };
+}
+
+function readPositive(value, label) {
+  const n = typeof value === 'number' ? value : parseAmount(value);
+  if (!Number.isFinite(n) || n <= 0) return { error: '请填写大于0的' + label };
+  return { value: n };
+}
+
+function readNonNegative(value, label) {
+  if (value === '' || value == null) return { value: 0 };
+  const n = typeof value === 'number' ? value : parseAmount(value);
+  if (!Number.isFinite(n) || n < 0) return { error: label + '格式不正确' };
+  return { value: n };
+}
+
+function calcScenario(input) {
+  input = input || {};
+  const key = String(input.category || '');
+  const meta = CATEGORIES[key];
+  if (!meta) return invalid('请选择案件类型');
+
+  const isCase = meta.mode === 'case';
+  const canHalve = isCase && key !== 'jurisdiction';
+  if (input.half === 'counterclaim') {
+    return invalid('反诉 / 第三人请求不能作为本诉减半情形；请通过 counterclaimAmount 单独计费');
+  }
+  const half = canHalve && input.half && HALF_REASONS[input.half] ? input.half : '';
+  const supportsCounterclaim = key === 'property' || (key === 'ip' && !!input.hasAmount);
+
+  if (!supportsCounterclaim && input.counterclaimAmount != null && input.counterclaimAmount !== '') {
+    return invalid('反诉 / 有独立请求权第三人独立计费仅适用于财产案件，或有争议金额的知识产权民事案件');
+  }
+
+  let amountValue = null;
+  let counterclaimAmount = null;
+  let counterclaim = null;
+  let mainBaseFee = null;
+  let baseFee = 0;
+  let fee = 0;
+  let range = null;
+  let lines = [];
+  let discounts = [];
+  let sub = '';
+  let timing = isCase ? '立案时预交' : '申请时预交';
+  let label = '预计需交纳';
+  let note = '';
+  let formula = '';
+  let discount = null;
+
+  if (key === 'property') {
+    const r = readPositive(input.amount, '诉讼请求金额');
+    if (r.error) return invalid(r.error);
+    amountValue = r.value;
+    const pf = propertyFee(r.value);
+    mainBaseFee = pf.total;
+    baseFee = pf.total;
+    fee = pf.total;
+    lines = pf.lines;
+    sub = '财产案件 · 诉讼请求 ' + formatNum(r.value) + ' 元';
+    note = '二审上诉的，按不服一审判决部分的金额计算。';
+    formula = '本诉按诉讼请求金额分段累计 = ' + money(pf.total);
+
+    if (input.counterclaimAmount != null && input.counterclaimAmount !== '') {
+      const cr = readPositive(input.counterclaimAmount, '反诉 / 第三人请求金额');
+      if (cr.error) return invalid(cr.error);
+      counterclaimAmount = cr.value;
+      counterclaim = buildCounterclaim(cr.value);
+      baseFee = round2(baseFee + counterclaim.base);
+      fee = round2(fee + counterclaim.fee);
+      lines = lines.concat(counterclaim.lines);
+      discounts.push(counterclaim.discount);
+      sub = '财产案件 · 本诉 ' + formatNum(r.value) + ' 元 + 反诉/第三人 ' + formatNum(cr.value) + ' 元';
+      note += '反诉 / 有独立请求权第三人请求，按自己的请求金额单独计费后减半（《诉讼费用交纳办法》第18条）；本诉不因此减半。';
+      formula += '；反诉/第三人 ' + money(counterclaim.base) + ' × 50% = ' + money(counterclaim.fee);
+    }
+  } else if (key === 'divorce') {
+    const included = !!input.propertyIncluded;
+    let propertyAmount = 0;
+    if (included) {
+      if (
+        input.propertyAmount == null ||
+        input.propertyAmount === '' ||
+        (typeof input.propertyAmount === 'number' && !Number.isFinite(input.propertyAmount))
+      ) {
+        return invalid('请填写财产总额；没有财产分割请选“不涉及”');
+      }
+      const r = readNonNegative(input.propertyAmount, '财产总额');
+      if (r.error) return invalid(r.error);
+      propertyAmount = r.value;
+    }
+    amountValue = propertyAmount;
+    const extra = propertyAmount > DATA.divorce.propertyThreshold
+      ? (propertyAmount - DATA.divorce.propertyThreshold) * DATA.divorce.propertyRate
+      : 0;
+    baseFee = round2(DATA.hubei.divorce + extra);
+    fee = baseFee;
+    lines = [{ label: '离婚案件基础受理费', detail: '湖北省标准：每件200元', amount: DATA.hubei.divorce }];
+    if (propertyAmount > 0 && extra > 0) {
+      lines.push({
+        label: '财产分割超额部分',
+        detail: '(' + formatNum(propertyAmount) + ' − 200,000) × 0.5%',
+        amount: round2(extra)
+      });
+    } else if (propertyAmount > 0) {
+      lines.push({ label: '财产分割', detail: '财产总额不超过20万元，不另行交纳', amount: 0, zero: true });
+    }
+    sub = propertyAmount > 0
+      ? '离婚案件 · 财产总额 ' + formatNum(propertyAmount) + ' 元'
+      : '离婚案件 · 不涉及财产分割';
+    note = '财产总额不超过20万元不另收费；超过20万元的部分按0.5%加收，不按财产案件全额分段。';
+    formula = '200' + (extra > 0 ? ' + (' + formatNum(propertyAmount) + ' − 200,000) × 0.5%' : '') + ' = ' + money(baseFee);
+  } else if (key === 'personality') {
+    const r = readNonNegative(input.damages, '损害赔偿金额');
+    if (r.error) return invalid(r.error);
+    amountValue = r.value;
+    const d = r.value;
+    let extra = 0;
+    lines = [{ label: '人格权案件基础受理费', detail: '湖北省标准：每件300元', amount: DATA.hubei.personality }];
+    if (d > DATA.personality.threshold) {
+      const firstPart = Math.min(d, DATA.personality.firstCap) - DATA.personality.threshold;
+      const firstVal = firstPart * DATA.personality.firstRate;
+      extra += firstVal;
+      lines.push({
+        label: '5万–10万元部分',
+        detail: formatNum(firstPart) + ' × 1%',
+        amount: round2(firstVal)
+      });
+    }
+    if (d > DATA.personality.firstCap) {
+      const secondPart = d - DATA.personality.firstCap;
+      const secondVal = secondPart * DATA.personality.rate;
+      extra += secondVal;
+      lines.push({
+        label: '10万元以上部分',
+        detail: formatNum(secondPart) + ' × 0.5%',
+        amount: round2(secondVal)
+      });
+    }
+    if (d > 0 && d <= DATA.personality.threshold) {
+      lines.push({ label: '损害赔偿', detail: '不超过5万元，不另行交纳', amount: 0, zero: true });
+    }
+    baseFee = round2(DATA.hubei.personality + extra);
+    fee = baseFee;
+    sub = d > 0
+      ? '人格权案件 · 索赔 ' + formatNum(d) + ' 元'
+      : '人格权案件 · 无损害赔偿';
+    note = '赔偿金额不超过5万元不另收费；5万–10万元部分按1%，10万元以上部分按0.5%分段加收。';
+    formula = '300' + (extra > 0 ? ' + 损害赔偿分段加收' : '') + ' = ' + money(baseFee);
+  } else if (key === 'labor') {
+    baseFee = DATA.labor.fee;
+    fee = baseFee;
+    lines = [{ label: '劳动争议案件', detail: '每件10元', amount: baseFee }];
+    sub = '劳动争议 · 按件收费';
+    note = '劳动争议案件每件交纳10元；追索劳动报酬的案件可以不预交，最终由败诉方负担。';
+    formula = '每件10元';
+  } else if (key === 'ip') {
+    if (input.hasAmount) {
+      const r = readPositive(input.amount, '争议金额');
+      if (r.error) return invalid(r.error);
+      amountValue = r.value;
+      const pf = propertyFee(r.value);
+      mainBaseFee = pf.total;
+      baseFee = pf.total;
+      fee = pf.total;
+      lines = pf.lines;
+      sub = '知识产权民事案件 · 争议金额 ' + formatNum(r.value) + ' 元';
+      note = '有争议金额的知识产权民事案件，按财产案件标准计算。';
+      formula = '本诉按争议金额适用财产案件分段累计 = ' + money(pf.total);
+
+      if (input.counterclaimAmount != null && input.counterclaimAmount !== '') {
+        const cr = readPositive(input.counterclaimAmount, '反诉 / 第三人请求金额');
+        if (cr.error) return invalid(cr.error);
+        counterclaimAmount = cr.value;
+        counterclaim = buildCounterclaim(cr.value);
+        baseFee = round2(baseFee + counterclaim.base);
+        fee = round2(fee + counterclaim.fee);
+        lines = lines.concat(counterclaim.lines);
+        discounts.push(counterclaim.discount);
+        sub = '知识产权民事案件 · 本诉 ' + formatNum(r.value) + ' 元 + 反诉/第三人 ' + formatNum(cr.value) + ' 元';
+        note += '反诉 / 有独立请求权第三人请求，按自己的请求金额单独计费后减半（《诉讼费用交纳办法》第18条）；本诉不因此减半。';
+        formula += '；反诉/第三人 ' + money(counterclaim.base) + ' × 50% = ' + money(counterclaim.fee);
+      }
+    } else {
+      baseFee = DATA.hubei.ipNoAmount;
+      fee = baseFee;
+      lines = [{ label: '知识产权民事案件（无争议金额）', detail: '湖北省标准：每件1,000元', amount: baseFee }];
+      sub = '知识产权民事案件 · 无争议金额';
+      note = '没有争议金额或者价额的知识产权民事案件，每件交纳1,000元。';
+      formula = '无争议金额，按件1,000元';
+    }
+  } else if (key === 'administrative') {
+    baseFee = input.special ? DATA.administrative.special : DATA.administrative.general;
+    fee = baseFee;
+    lines = [{
+      label: input.special ? '商标、专利、海事行政案件' : '其他行政案件',
+      detail: input.special ? '每件100元' : '每件50元',
+      amount: baseFee
+    }];
+    sub = '行政案件 · ' + (input.special ? '商标、专利、海事行政' : '其他行政案件');
+    note = input.special
+      ? '商标、专利、海事行政案件每件100元；海事行政案件的一审管辖法院以法院立案审查为准。'
+      : '其他行政案件每件50元；行政赔偿案件不交案件受理费。';
+    formula = (input.special ? '100' : '50') + ' 元/件';
+  } else if (key === 'nonProperty') {
+    baseFee = DATA.hubei.otherNonProperty;
+    fee = baseFee;
+    lines = [{ label: '其他非财产案件', detail: '湖北省标准：每件80元', amount: baseFee }];
+    sub = '其他非财产案件 · 按件收费';
+    note = '其他非财产案件每件80元；如实际涉及财产金额，应按财产案件标准计算。';
+    formula = '每件80元';
+  } else if (key === 'jurisdiction') {
+    baseFee = DATA.hubei.jurisdiction;
+    fee = baseFee;
+    timing = '异议不成立时交纳';
+    lines = [{ label: '管辖权异议', detail: '异议不成立：每件80元', amount: baseFee }];
+    sub = '管辖权异议 · 异议不成立';
+    note = '仅在管辖权异议不成立时交纳80元；异议成立的，不交纳。对管辖权异议裁定提起上诉，不交案件受理费。';
+    formula = '异议不成立，每件80元';
+  } else if (key === 'execution') {
+    const hasAmount = input.hasAmount !== false;
+    if (!hasAmount) {
+      range = { min: DATA.executionNoAmount.min, max: DATA.executionNoAmount.max };
+      baseFee = null;
+      fee = null;
+      lines = [{ label: '没有执行金额或价额', detail: '每件50–500元，由法院核定', amountText: '50–500元' }];
+      sub = '申请执行 · 没有执行金额或价额';
+      timing = '执行后交纳';
+      label = '执行后应交';
+      note = '没有执行金额或者价额的，每件交纳50–500元，具体由法院核定；执行申请费不由申请人预交。';
+      formula = '每件50–500元';
+    } else {
+      const r = readPositive(input.amount, '执行金额');
+      if (r.error) return invalid(r.error);
+      amountValue = r.value;
+      const ef = executionFee(r.value);
+      baseFee = ef.total;
+      fee = ef.total;
+      lines = ef.lines;
+      sub = '申请执行 · 执行金额 ' + formatNum(r.value) + ' 元';
+      timing = '执行后交纳';
+      label = '执行后应交';
+      note = '申请执行费不由申请人预交，执行后由被执行人负担；执行中达成和解的，负担由双方协商或法院决定。';
+      formula = '按执行金额分段累计 = ' + money(ef.total);
+    }
+  } else if (key === 'preservation') {
+    const r = readNonNegative(input.amount, '保全金额');
+    if (r.error) return invalid(r.error);
+    amountValue = r.value;
+    const pf = preservationFee(r.value);
+    baseFee = pf.total;
+    fee = pf.total;
+    lines = pf.lines;
+    sub = r.value > 0
+      ? '财产保全 · 保全金额 ' + formatNum(r.value) + ' 元'
+      : '财产保全 · 不涉及财产数额';
+    timing = '申请保全时预交';
+    note = '保全申请费需预交；最终一般由申请人负担，起诉时可以将该费用列入诉讼请求。';
+    formula = '按实际保全金额分段累计' + (pf.total === DATA.preservation.cap ? '，封顶5,000元' : '') + ' = ' + money(pf.total);
+  } else if (key === 'paymentOrder') {
+    const r = readPositive(input.amount, '债权金额');
+    if (r.error) return invalid(r.error);
+    amountValue = r.value;
+    const pf = propertyFee(r.value);
+    baseFee = pf.total;
+    fee = round2(pf.total / DATA.paymentOrder.divisor);
+    lines = [{
+      label: '支付令申请费',
+      detail: '比照财产案件受理费 ' + money(pf.total) + ' × 1/3',
+      amount: fee,
+      emphasis: true
+    }];
+    sub = '支付令 · 债权金额 ' + formatNum(r.value) + ' 元';
+    timing = '申请时预交';
+    note = '支付令申请费比照财产案件受理费的1/3；债务人未提出异议的由债务人负担，异议致程序终结的由申请人负担。';
+    formula = money(pf.total) + ' × 1/3 = ' + money(fee);
+  } else if (key === 'publicNotice') {
+    baseFee = DATA.publicNotice.fee;
+    fee = baseFee;
+    lines = [{ label: '公示催告', detail: '每件100元', amount: baseFee }];
+    sub = '公示催告 · 按件收费';
+    timing = '申请时预交';
+    note = '公示催告申请费由申请人负担。';
+    formula = '每件100元';
+  } else if (key === 'arbitration') {
+    baseFee = DATA.arbitration.fee;
+    fee = baseFee;
+    lines = [{ label: '撤销仲裁裁决 / 认定仲裁协议效力', detail: '每件400元', amount: baseFee }];
+    sub = '撤销仲裁裁决 / 认定仲裁协议效力 · 按件收费';
+    timing = '申请时预交';
+    note = '申请撤销仲裁裁决或者认定仲裁协议效力，每件交纳400元。';
+    formula = '每件400元';
+  } else if (key === 'bankruptcy') {
+    const r = readPositive(input.amount, '破产财产总额');
+    if (r.error) return invalid(r.error);
+    amountValue = r.value;
+    const pf = propertyFee(r.value);
+    baseFee = pf.total;
+    const half = round2(pf.total / 2);
+    fee = Math.min(half, DATA.bankruptcy.cap);
+    lines = pf.lines.concat([{ label: '破产案件减半交纳', detail: '按财产案件标准 × 50%', amount: -half, adjustment: true }]);
+    if (half > DATA.bankruptcy.cap) {
+      lines.push({ label: '破产申请费封顶', detail: '最高不超过300,000元', amount: round2(DATA.bankruptcy.cap - half), adjustment: true });
+    }
+    sub = '破产申请 · 破产财产总额 ' + formatNum(r.value) + ' 元';
+    timing = '清算后交纳';
+    label = '清算后应交';
+    note = '破产案件依据破产财产总额计算，按财产案件标准减半交纳，最高不超过30万元；破产申请费清算后交纳。';
+    formula = money(pf.total) + ' × 50%' + (half > DATA.bankruptcy.cap ? '，封顶300,000元' : '') + ' = ' + money(fee);
+  } else {
+    return invalid('暂不支持该案件类型');
+  }
+
+  if (mainBaseFee == null) mainBaseFee = baseFee;
+
+  if (canHalve) {
+    const h = applyHalf(mainBaseFee, half);
+    discount = h.discount;
+    if (discount) {
+      fee = round2(fee - discount.amount);
+      discount.scope = 'main';
+      discount.scopeLabel = '本诉';
+      discounts.push(discount);
+      lines.push({
+        label: (counterclaim ? '本诉减半一次' : '减半一次') + '（' + discount.label + '）',
+        detail: '民诉法解释第206条：同一份受理费只能减半一次',
+        amount: -discount.amount,
+        adjustment: true,
+        section: counterclaim ? 'main' : undefined
+      });
+      note = [note, (counterclaim ? '本诉' : '') + '已按减半一次计算；立案时法院可能先按全额通知预交，结案时多退少补。'].filter(Boolean).join('');
+      formula += '；' + (counterclaim ? '本诉减半后合计' : '减半后') + ' = ' + money(fee);
+    } else {
+      note = [note, '本诉若适用简易程序、调解结案或撤诉，可减半交纳，且只能减半一次。'].filter(Boolean).join('');
+    }
+  }
+
+  if (discounts.length === 1) discount = discounts[0];
+  else if (discounts.length > 1) discount = null;
+
+  return {
+    ok: true,
+    category: key,
+    categoryName: meta.name,
+    mode: meta.mode,
+    feeKind: meta.feeKind,
+    amountValue,
+    counterclaimAmount,
+    counterclaim,
+    baseFee: baseFee == null ? null : round2(baseFee),
+    fee: fee == null ? null : round2(fee),
+    range,
+    lines,
+    discount,
+    discounts,
+    sub,
+    timing,
+    label,
+    note,
+    formula,
+    half: half || null,
+    version: DATA.version
+  };
+}
+
+/* ===== 三、页面渲染 ===== */
+const UI_META = {
+  property: {
+    formSub: '按诉讼请求金额分段累计；默认示例 10 万元，可直接修改。',
+    quick: [[10000, '1万'], [100000, '10万'], [500000, '50万'], [1000000, '100万'], [5000000, '500万']],
+    help: '按起诉时主张的总额填写，含利息、违约金等；上诉的，填不服一审判决的部分。'
+  },
+  divorce: {
+    formSub: `基础受理费 ${DATA.hubei.divorce} 元；财产总额超过 ${formatNum(DATA.divorce.propertyThreshold / 10000)} 万元的部分另按 ${formatPct(DATA.divorce.propertyRate)} 加收；默认财产总额为示例，可直接修改。`,
+    quick: [[200000, '20万'], [500000, '50万'], [1000000, '100万'], [2000000, '200万']],
+    help: `填夫妻共同财产总额，不是仅填你主张分得的份额；不超过 ${formatNum(DATA.divorce.propertyThreshold / 10000)} 万元不另收费。`
+  },
+  personality: {
+    formSub: `基础受理费 ${DATA.hubei.personality} 元；损害赔偿超过 ${formatNum(DATA.personality.threshold / 10000)} 万元的部分分段加收。`,
+    quick: [[0, '无赔偿'], [50000, '5万'], [100000, '10万'], [500000, '50万'], [1000000, '100万']],
+    help: '填你主张的损害赔偿总额（含精神损害抚慰金）；无赔偿请求可留空。'
+  },
+  labor: {
+    formSub: `劳动争议每件 ${DATA.labor.fee} 元；追索劳动报酬可以不预交。`,
+    help: `劳动争议案件不按工资数额分段，按件收取。`
+  },
+  ip: {
+    formSub: `无争议金额按件 ${formatNum(DATA.hubei.ipNoAmount)} 元；有争议金额的，按财产案件标准计算；有金额时默认示例可改。`,
+    quick: [[100000, '10万'], [500000, '50万'], [1000000, '100万'], [5000000, '500万']],
+    help: '填你主张的争议金额或价额；没有具体金额的，选“无争议金额”。'
+  },
+  administrative: {
+    formSub: `其他行政案件每件 ${DATA.administrative.general} 元；商标、专利、海事行政案件每件 ${DATA.administrative.special} 元。`,
+    help: '行政赔偿案件不交案件受理费，不适用本项。'
+  },
+  nonProperty: {
+    formSub: `其他非财产案件每件 ${DATA.hubei.otherNonProperty} 元。`,
+    help: '如诉讼请求实际涉及财产金额，应按财产案件标准计算。'
+  },
+  jurisdiction: {
+    formSub: `仅在管辖权异议不成立时交纳 ${DATA.hubei.jurisdiction} 元。`,
+    help: '异议成立不交；对管辖权异议裁定提起上诉，不交案件受理费。'
+  },
+  execution: {
+    formSub: `按执行金额分段累计；没有执行金额的，每件 ${DATA.executionNoAmount.min}–${DATA.executionNoAmount.max} 元；默认金额为示例，可直接修改。`,
+    quick: [[100000, '10万'], [500000, '50万'], [1000000, '100万'], [5000000, '500万']],
+    help: '填申请执行的金额；执行申请费不由申请人预交，执行后由被执行人负担。'
+  },
+  preservation: {
+    formSub: `按实际保全金额分段累计，最高不超过 ${formatNum(DATA.preservation.cap)} 元；默认金额为示例，可直接修改。`,
+    quick: [[0, '不涉及金额'], [100000, '10万'], [500000, '50万'], [1000000, '100万'], [5000000, '500万']],
+    help: `填实际申请保全的财产数额；不涉及金额或不超过 ${formatNum(DATA.preservation.threshold)} 元的，按 ${DATA.preservation.base} 元。`
+  },
+  paymentOrder: {
+    formSub: '比照财产案件受理费的 1/3 交纳；默认金额为示例，可直接修改。',
+    quick: [[100000, '10万'], [500000, '50万'], [1000000, '100万']],
+    help: '填你申请支付令追讨的债权金额。'
+  },
+  publicNotice: {
+    formSub: `公示催告每件 ${DATA.publicNotice.fee} 元。`,
+    help: '适用于票据等依法可以申请公示催告的事项。'
+  },
+  arbitration: {
+    formSub: `撤销仲裁裁决或认定仲裁协议效力，每件 ${DATA.arbitration.fee} 元。`,
+    help: '按件收费，不按争议金额分段。'
+  },
+  bankruptcy: {
+    formSub: `按破产财产总额计算，按财产案件标准减半，最高 ${formatNum(DATA.bankruptcy.cap / 10000)} 万元；默认金额为示例，可直接修改。`,
+    quick: [[1000000, '100万'], [10000000, '1000万'], [50000000, '5000万'], [100000000, '1亿']],
+    help: '填破产财产总额的预估数；破产申请费清算后交纳。'
+  }
+};
+
+const state = {
+  mode: 'case',
+  category: 'property',
+  half: '',
+  amounts: {
+    property: 100000,
+    divorceProperty: 500000,
+    personality: 0,
+    ip: 100000,
+    execution: 500000,
+    preservation: 100000,
+    paymentOrder: 100000,
+    bankruptcy: 1000000,
+    counterclaim: 0
+  },
+  toggles: {
+    divorceProperty: false,
+    ipHasAmount: false,
+    executionHasAmount: true,
+    adminSpecial: false,
+    counterclaim: false
+  }
+};
+
+let lastResult = null;
+let toastTimer = null;
+
+const $ = (id) => document.getElementById(id);
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+function currentMeta() {
+  return CATEGORIES[state.category] || CATEGORIES.property;
+}
+
+function renderTabs() {
+  const isCase = state.mode === 'case';
+  $('tabCase').classList.toggle('on', isCase);
+  $('tabApply').classList.toggle('on', !isCase);
+  $('tabCase').setAttribute('aria-selected', String(isCase));
+  $('tabApply').setAttribute('aria-selected', String(!isCase));
+}
+
+function renderCats() {
+  const keys = CATEGORY_ORDER[state.mode];
+  $('catGrid').innerHTML = keys.map((key) => {
+    const c = CATEGORIES[key];
+    const on = key === state.category;
+    return '<button type="button" class="cat tone-' + c.tone + (on ? ' on' : '') + '" data-cat="' + key + '" aria-pressed="' + on + '">'
+      + '<span class="cat-ico" aria-hidden="true">' + esc(c.icon) + '</span>'
+      + '<span class="cat-txt"><b>' + esc(c.name) + '</b><small>' + esc(c.hint) + '</small></span>'
+      + '<span class="cat-check" aria-hidden="true">✓</span>'
+      + '</button>';
+  }).join('');
+}
+
+function amountValueFor(key) {
+  return state.amounts[key];
+}
+
+function displayAmount(value) {
+  return Number.isFinite(value) && value > 0 ? String(value) : '';
+}
+
+function amountField(opts) {
+  const key = opts.key;
+  const value = displayAmount(amountValueFor(key));
+  const id = 'amount_' + key;
+  const helpId = id + '_help';
+  const optional = opts.optional ? '<span class="optional">选填</span>' : '';
+  const quick = (opts.quick || []).map(([v, label]) =>
+    '<button type="button" class="quick" data-quick-key="' + key + '" data-quick-value="' + v + '">' + esc(label) + '</button>'
+  ).join('');
+  return '<div class="amount-field">'
+    + '<div class="amount-label-row"><label for="' + id + '">' + esc(opts.label) + '</label>' + optional + '</div>'
+    + '<div class="amount-wrap"><span class="amount-prefix" aria-hidden="true">¥</span>'
+    + '<input id="' + id + '" data-amount-key="' + key + '" data-optional="' + (opts.optional ? '1' : '0') + '" '
+    + 'type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="' + esc(value) + '" '
+    + 'placeholder="' + esc(opts.placeholder || '请输入金额') + '" aria-describedby="' + helpId + '" />'
+    + '<span class="amount-suffix">元</span></div>'
+    + (quick ? '<div class="quick-row"><span>快速填入</span>' + quick + '</div>' : '')
+    + '<p class="hint" id="' + helpId + '">' + opts.help + '</p>'
+    + '</div>';
+}
+
+function counterclaimField() {
+  const enabled = !!state.toggles.counterclaim;
+  const quick = [[100000, '10万'], [500000, '50万'], [1000000, '100万'], [5000000, '500万']];
+  return '<div class="counterclaim-box">'
+    + '<label class="check-line" for="counterclaimToggle">'
+    + '<input type="checkbox" id="counterclaimToggle"' + (enabled ? ' checked' : '') + ' />'
+    + '<span><b>有反诉 / 有独立请求权第三人</b><small>法院决定合并审理时，这份受理费单独计算后减半</small></span>'
+    + '</label>'
+    + (enabled ? amountField({
+        key: 'counterclaim',
+        label: '反诉 / 第三人请求金额',
+        placeholder: '例如 500000',
+        quick,
+        help: '填反诉或有独立请求权第三人自己的请求金额，不是本诉金额；本诉仍按上面的金额计算。'
+      }) : '')
+    + '<p class="hint">第18条：反诉/第三人请求单独计费后减半；本诉不因此减半。两份受理费各自只减一次。</p>'
+    + '</div>';
+}
+
+function toggleField(opts) {
+  const value = String(!!state.toggles[opts.key]);
+  const buttons = opts.options.map(([v, label, sub]) =>
+    '<button type="button" data-toggle="' + opts.key + '" data-value="' + v + '" class="' + (value === v ? 'on' : '') + '" aria-pressed="' + (value === v) + '">'
+    + esc(label) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</button>'
+  ).join('');
+  return '<div class="inline-choice"><span class="inline-label">' + esc(opts.label) + '</span>'
+    + '<div class="seg" role="group" aria-label="' + esc(opts.label) + '">' + buttons + '</div>'
+    + (opts.help ? '<p class="hint">' + opts.help + '</p>' : '') + '</div>';
+}
+
+function halfField() {
+  const meta = currentMeta();
+  if (meta.mode !== 'case' || state.category === 'jurisdiction') return '';
+  const opts = [
+    ['', '不减半（普通程序审理、判决结案）'],
+    ['simple', '适用简易程序 / 小额诉讼（减半）'],
+    ['mediation', '以调解方式结案（减半）'],
+    ['withdrawal', '当事人申请撤诉（减半）']
+  ];
+  const current = HALF_REASONS[state.half] ? state.half : '';
+  return '<div class="half-box">'
+    + '<div class="half-top"><label for="halfSelect">本诉是否有减半情形？</label><span class="pill">最多减半一次</span></div>'
+    + '<div class="select-wrap"><select id="halfSelect">'
+    + opts.map(([v, l]) => '<option value="' + v + '"' + (v === current ? ' selected' : '') + '>' + esc(l) + '</option>').join('')
+    + '</select></div>'
+    + '<p class="hint">简易程序、调解、撤诉等情形同时出现，同一份本诉受理费也只减半一次（民诉法解释第206条）。反诉/第三人另按第18条单独减半。</p>'
+    + '</div>';
+}
+
+function flatFee(amount, kicker, desc) {
+  return '<div class="flat-fee"><span class="flat-kicker">' + esc(kicker) + '</span>'
+    + '<strong>' + (typeof amount === 'string' ? esc(amount) : money(amount)) + '</strong>'
+    + '<p>' + desc + '</p></div>';
+}
+
+function formTemplate() {
+  const meta = currentMeta();
+  const ui = UI_META[state.category] || {};
+  let body = '';
+
+  if (state.category === 'property') {
+    body = amountField({
+      key: 'property',
+      label: '诉讼请求金额',
+      placeholder: '例如 100000',
+      quick: ui.quick,
+      help: ui.help
+    }) + counterclaimField() + halfField();
+  } else if (state.category === 'divorce') {
+    body = toggleField({
+      key: 'divorceProperty',
+      label: '是否涉及财产分割',
+      options: [['false', '不涉及', '只算离婚'], ['true', '涉及', '加算财产部分']],
+      help: `基础受理费 ${DATA.hubei.divorce} 元；财产总额不超过 ${formatNum(DATA.divorce.propertyThreshold / 10000)} 万元不另收费。`
+    });
+    if (state.toggles.divorceProperty) {
+      body += amountField({
+        key: 'divorceProperty',
+        label: '财产总额',
+        placeholder: '例如 500000',
+        quick: ui.quick,
+        help: ui.help
+      });
+    }
+    body += '<div class="mini-formula"><span>基础受理费</span><b>' + money(DATA.hubei.divorce) + '</b><span>不涉及财产分割时，这就是全部受理费</span></div>' + halfField();
+  } else if (state.category === 'personality') {
+    body = '<div class="mini-formula"><span>基础受理费</span><b>' + money(DATA.hubei.personality) + '</b><span>损害赔偿不超过 ' + formatNum(DATA.personality.threshold / 10000) + ' 万元不另收</span></div>'
+      + amountField({
+        key: 'personality',
+        label: '损害赔偿金额',
+        placeholder: '无赔偿可留空',
+        quick: ui.quick,
+        help: ui.help,
+        optional: true
+      }) + halfField();
+  } else if (state.category === 'ip') {
+    body = toggleField({
+      key: 'ipHasAmount',
+      label: '是否有争议金额',
+      options: [['true', '有争议金额', '按财产案件算'], ['false', '无争议金额', '按件收费']],
+      help: `知识产权民事案件，无争议金额按件 ${formatNum(DATA.hubei.ipNoAmount)} 元；有争议金额按财产案件标准。`
+    });
+    if (state.toggles.ipHasAmount) {
+      body += amountField({
+        key: 'ip',
+        label: '争议金额',
+        placeholder: '例如 100000',
+        quick: ui.quick,
+        help: ui.help
+      });
+      body += counterclaimField();
+    } else {
+      body += flatFee(DATA.hubei.ipNoAmount, '按件收费', `没有争议金额或价额，每件 ${formatNum(DATA.hubei.ipNoAmount)} 元。`);
+    }
+    body += halfField();
+  } else if (state.category === 'administrative') {
+    body = toggleField({
+      key: 'adminSpecial',
+      label: '行政案件类型',
+      options: [['false', '其他行政案件', `每件 ${DATA.administrative.general} 元`], ['true', '商标 / 专利 / 海事', `每件 ${DATA.administrative.special} 元`]],
+      help: '行政赔偿案件不交案件受理费。'
+    });
+    body += flatFee(state.toggles.adminSpecial ? DATA.administrative.special : DATA.administrative.general, '按件收费', state.toggles.adminSpecial ? `商标、专利、海事行政案件每件 ${DATA.administrative.special} 元。` : `其他行政案件每件 ${DATA.administrative.general} 元。`);
+    body += halfField();
+  } else if (state.category === 'labor') {
+    body = flatFee(DATA.labor.fee, '按件收费', `劳动争议案件每件 ${DATA.labor.fee} 元；追索劳动报酬可以不预交。`) + halfField();
+  } else if (state.category === 'nonProperty') {
+    body = flatFee(DATA.hubei.otherNonProperty, '按件收费', `其他非财产案件每件 ${DATA.hubei.otherNonProperty} 元；涉及财产金额的，按财产案件标准。`) + halfField();
+  } else if (state.category === 'jurisdiction') {
+    body = flatFee(DATA.hubei.jurisdiction, '异议不成立', `管辖权异议不成立时每件 ${DATA.hubei.jurisdiction} 元；异议成立不交。`)
+      + '<div class="form-note"><span class="ico">i</span><div>对管辖权异议裁定提起上诉的，不交案件受理费。本项不适用减半。</div></div>';
+  } else if (state.category === 'execution') {
+    body = toggleField({
+      key: 'executionHasAmount',
+      label: '是否有执行金额',
+      options: [['true', '有执行金额', '按金额分段'], ['false', '没有执行金额', `每件 ${DATA.executionNoAmount.min}–${DATA.executionNoAmount.max} 元`]],
+      help: '执行申请费不由申请人预交，执行后由被执行人负担。'
+    });
+    if (state.toggles.executionHasAmount) {
+      body += amountField({
+        key: 'execution',
+        label: '执行金额',
+        placeholder: '例如 500000',
+        quick: ui.quick,
+        help: ui.help
+      });
+    } else {
+      body += flatFee(`¥${DATA.executionNoAmount.min}–${DATA.executionNoAmount.max}`, '法院核定', `没有执行金额或价额的，每件 ${DATA.executionNoAmount.min}–${DATA.executionNoAmount.max} 元。`);
+    }
+  } else if (state.category === 'preservation') {
+    body = amountField({
+      key: 'preservation',
+      label: '保全金额',
+      placeholder: '不涉及金额可留空',
+      quick: ui.quick,
+      help: ui.help,
+      optional: true
+    }) + '<div class="form-note warm"><span class="ico">!</span><div>保全费按实际保全的财产数额计算，最高不超过 ' + formatNum(DATA.preservation.cap) + ' 元；不涉及金额或不超过 ' + formatNum(DATA.preservation.threshold) + ' 元按 ' + DATA.preservation.base + ' 元。</div></div>';
+  } else if (state.category === 'paymentOrder') {
+    body = amountField({
+      key: 'paymentOrder',
+      label: '债权金额',
+      placeholder: '例如 100000',
+      quick: ui.quick,
+      help: ui.help
+    }) + '<div class="form-note"><span class="ico">i</span><div>支付令申请费 = 财产案件受理费 × 1/3；支付令失效转入诉讼的，按规定补交案件受理费。</div></div>';
+  } else if (state.category === 'publicNotice') {
+    body = flatFee(DATA.publicNotice.fee, '按件收费', `公示催告每件 ${DATA.publicNotice.fee} 元。`);
+  } else if (state.category === 'arbitration') {
+    body = flatFee(DATA.arbitration.fee, '按件收费', `撤销仲裁裁决或认定仲裁协议效力，每件 ${DATA.arbitration.fee} 元。`);
+  } else if (state.category === 'bankruptcy') {
+    body = amountField({
+      key: 'bankruptcy',
+      label: '破产财产总额',
+      placeholder: '例如 1000000',
+      quick: ui.quick,
+      help: ui.help
+    }) + '<div class="form-note"><span class="ico">i</span><div>按财产案件标准减半交纳，最高不超过 ' + formatNum(DATA.bankruptcy.cap / 10000) + ' 万元；破产申请费清算后交纳。</div></div>';
+  }
+
+  return body;
+}
+
+function buildScenario() {
+  const s = { category: state.category, half: state.half };
+  if (state.category === 'property') s.amount = state.amounts.property;
+  if (state.category === 'divorce') {
+    s.propertyIncluded = state.toggles.divorceProperty;
+    s.propertyAmount = state.amounts.divorceProperty;
+  }
+  if (state.category === 'personality') s.damages = state.amounts.personality;
+  if (state.category === 'ip') {
+    s.hasAmount = state.toggles.ipHasAmount;
+    s.amount = state.amounts.ip;
+  }
+  if (state.category === 'administrative') s.special = state.toggles.adminSpecial;
+  if (state.category === 'execution') {
+    s.hasAmount = state.toggles.executionHasAmount;
+    s.amount = state.amounts.execution;
+  }
+  if (state.category === 'preservation') s.amount = state.amounts.preservation;
+  if (state.category === 'paymentOrder') s.amount = state.amounts.paymentOrder;
+  if (state.category === 'bankruptcy') s.amount = state.amounts.bankruptcy;
+  if ((state.category === 'property' || (state.category === 'ip' && state.toggles.ipHasAmount)) && state.toggles.counterclaim) {
+    s.counterclaimAmount = state.amounts.counterclaim;
+  }
+  return s;
+}
+
+function renderBreakdown(result) {
+  if (!result.ok) {
+    $('breakdown').innerHTML = '<div class="hint" style="padding:8px 0 2px">填写有效金额后，这里会显示分段计算过程。</div>';
+    return;
+  }
+  if (!result.lines || !result.lines.length) {
+    $('breakdown').innerHTML = '<div class="hint" style="padding:8px 0 2px">本项按件收取，无分段明细。</div>';
+    return;
+  }
+  $('breakdown').innerHTML = result.lines.map((line) => {
+    const cls = 'bd-row' + (line.adjustment ? ' adjust' : '') + (line.emphasis ? ' emphasis' : '') + (line.zero || line.amount === 0 ? ' zero' : '');
+    const amount = line.amountText ? line.amountText : (Number.isFinite(line.amount) ? (line.amount < 0 ? signedMoney(line.amount) : money(line.amount)) : '—');
+    return '<div class="' + cls + '">'
+      + '<div class="bd-copy"><span class="bd-label">' + esc(line.label) + '</span>'
+      + (line.detail ? '<span class="bd-detail">' + esc(line.detail) + '</span>' : '')
+      + '</div><span class="bd-amount">' + esc(amount) + '</span></div>';
+  }).join('');
+}
+
+function resultAmountText(result) {
+  if (!result.ok) return '—';
+  if (result.range) return '¥' + formatNum(result.range.min) + '–' + formatNum(result.range.max);
+  return money(result.fee);
+}
+
+function renderResult(result) {
+  lastResult = result;
+  const meta = currentMeta();
+  const amountEl = $('resultAmount');
+  const floatAmount = $('floatAmount');
+
+  $('resultTag').textContent = meta.feeKind;
+  $('resultTiming').textContent = result.ok ? result.timing : '待填写';
+
+  if (!result.ok) {
+    $('resultLabel').textContent = '填写后自动计算';
+    amountEl.textContent = '—';
+    amountEl.classList.add('muted');
+    amountEl.classList.remove('range');
+    $('resultCase').textContent = result.error || '请选择类型并填写金额。';
+    $('discountBox').hidden = true;
+    $('resultNote').className = 'result-note warn';
+    $('resultNote').innerHTML = '<b>待填写：</b>' + esc(result.error || '请填写金额。');
+    renderBreakdown(result);
+    $('copyBtn').disabled = true;
+    $('printBtn').disabled = true;
+    floatAmount.textContent = '—';
+    $('floatLabel').textContent = '填写后自动计算';
+    return;
+  }
+
+  $('resultLabel').textContent = result.label;
+  amountEl.textContent = resultAmountText(result);
+  amountEl.classList.remove('muted');
+  amountEl.classList.toggle('range', !!result.range);
+  $('resultCase').textContent = result.sub;
+  $('resultNote').className = 'result-note';
+  $('resultNote').innerHTML = '<b>提示：</b>' + esc(result.note);
+
+  const discounts = (result.discounts || (result.discount ? [result.discount] : []))
+    .slice()
+    .sort((a, b) => (a.scope === 'main' ? 0 : 1) - (b.scope === 'main' ? 0 : 1));
+  if (discounts.length) {
+    const saved = round2(discounts.reduce((sum, d) => sum + d.amount, 0));
+    const desc = discounts.map((d) => (d.scope === 'counterclaim' ? '反诉/第三人：' : '') + d.label).join('；');
+    $('discountBox').hidden = false;
+    $('discountBox').innerHTML = '<b>已减半：</b>' + esc(desc)
+      + ' · 原额 ' + money(result.baseFee) + '，少交 ' + money(saved);
+  } else {
+    $('discountBox').hidden = true;
+  }
+
+  renderBreakdown(result);
+  $('copyBtn').disabled = false;
+  $('printBtn').disabled = false;
+  floatAmount.textContent = resultAmountText(result);
+  $('floatLabel').textContent = result.feeKind + (result.timing ? ' · ' + result.timing : '');
+}
+
+function updateResult() {
+  const result = calcScenario(buildScenario());
+  renderResult(result);
+}
+
+function renderForm() {
+  const meta = currentMeta();
+  const ui = UI_META[state.category] || {};
+  $('formTitle').textContent = meta.mode === 'case' ? '填写金额与减半情形' : '填写申请事项';
+  $('formSub').textContent = ui.formSub || '金额可改，右侧结果实时更新。';
+  $('formBody').innerHTML = formTemplate();
+  updateResult();
+}
+
+function setMode(mode) {
+  state.mode = mode;
+  if (!CATEGORY_ORDER[mode].includes(state.category)) {
+    state.category = CATEGORY_ORDER[mode][0];
+  }
+  state.half = '';
+  renderTabs();
+  renderCats();
+  renderForm();
+}
+
+function setCategory(category) {
+  if (!CATEGORIES[category]) return;
+  state.category = category;
+  state.half = '';
+  renderCats();
+  renderForm();
+}
+
+function onToggle(key, raw) {
+  if (!(key in state.toggles)) return;
+  state.toggles[key] = raw === 'true' || raw === '1';
+  renderForm();
+}
+
+function onQuick(key, rawValue) {
+  const value = Number(rawValue);
+  if (!Number.isFinite(value)) return;
+  state.amounts[key] = value;
+  const input = document.querySelector('[data-amount-key="' + key + '"]');
+  if (input) {
+    input.value = value === 0 ? '' : String(value);
+    input.classList.remove('invalid');
+  }
+  updateResult();
+}
+
+function onAmountInput(input) {
+  const key = input.dataset.amountKey;
+  const raw = input.value;
+  let value = parseAmount(raw);
+  if (!raw.trim() && input.dataset.optional === '1') value = 0;
+  state.amounts[key] = value;
+  input.classList.toggle('invalid', !Number.isFinite(value) || value < 0);
+  updateResult();
+}
+
+function showToast(message) {
+  const el = $('toast');
+  el.textContent = message;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
+}
+
+function resultToText(result) {
+  if (!result || !result.ok) return '';
+  const lines = (result.lines || []).map((line) => {
+    const amount = line.amountText ? line.amountText : (line.amount < 0 ? signedMoney(line.amount) : money(line.amount));
+    return '- ' + line.label + (line.detail ? '（' + line.detail + '）' : '') + '：' + amount;
+  }).join('\n');
+  const amount = resultAmountText(result);
+  const discounts = (result.discounts || (result.discount ? [result.discount] : []))
+    .slice()
+    .sort((a, b) => (a.scope === 'main' ? 0 : 1) - (b.scope === 'main' ? 0 : 1));
+  const saved = round2(discounts.reduce((sum, d) => sum + d.amount, 0));
+  const discount = discounts.length
+    ? '\n原额：' + money(result.baseFee)
+      + '\n减半：−' + money(saved)
+      + '（' + discounts.map((d) => (d.scope === 'counterclaim' ? '反诉/第三人：' : '') + d.label).join('；') + '）'
+    : '';
+  return [
+    '武汉诉讼费估算',
+    '类型：' + result.categoryName + '（' + result.feeKind + '）',
+    result.sub,
+    '结果：' + amount + (result.timing ? '（' + result.timing + '）' : ''),
+    discount.trim(),
+    '计算明细：',
+    lines,
+    '提示：' + result.note,
+    '依据：《诉讼费用交纳办法》（国务院令第481号）、鄂价费〔2008〕5号',
+    '估算时间：' + new Date().toLocaleString('zh-CN', { hour12: false }),
+    '仅供参考，以受理法院缴费通知书为准。'
+  ].filter(Boolean).join('\n');
+}
+
+async function copyResult() {
+  if (!lastResult || !lastResult.ok) return;
+  const text = resultToText(lastResult);
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (e) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    try {
+      ta.select();
+      if (!document.execCommand('copy')) throw new Error('execCommand copy failed');
+    } catch (err) {
+      showToast('复制失败，请手动选择计算明细');
+      return;
+    } finally {
+      document.body.removeChild(ta);
+    }
+  }
+  const btn = $('copyBtn');
+  const old = btn.textContent;
+  btn.textContent = '已复制';
+  showToast('明细已复制，可直接粘贴到备忘录或微信');
+  setTimeout(() => { btn.textContent = old; }, 1600);
+}
+
+function printResult() {
+  if (!lastResult || !lastResult.ok) return;
+  $('printDate').textContent = new Date().toLocaleString('zh-CN', { hour12: false });
+  window.print();
+}
+
+function resetAll() {
+  state.mode = 'case';
+  state.category = 'property';
+  state.half = '';
+  state.amounts = {
+    property: 100000,
+    divorceProperty: 500000,
+    personality: 0,
+    ip: 100000,
+    execution: 500000,
+    preservation: 100000,
+    paymentOrder: 100000,
+    bankruptcy: 1000000,
+    counterclaim: 0
+  };
+  state.toggles = {
+    divorceProperty: false,
+    ipHasAmount: false,
+    executionHasAmount: true,
+    adminSpecial: false,
+    counterclaim: false
+  };
+  renderTabs();
+  renderCats();
+  renderForm();
+  showToast('已恢复默认示例');
+}
+
+function bindEvents() {
+  $('tabCase').addEventListener('click', () => setMode('case'));
+  $('tabApply').addEventListener('click', () => setMode('application'));
+  $('catGrid').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-cat]');
+    if (btn) setCategory(btn.dataset.cat);
+  });
+  $('formBody').addEventListener('input', (e) => {
+    if (e.target.matches('[data-amount-key]')) onAmountInput(e.target);
+  });
+  $('formBody').addEventListener('change', (e) => {
+    if (e.target.id === 'halfSelect') {
+      state.half = e.target.value;
+      updateResult();
+    }
+    if (e.target.id === 'counterclaimToggle') {
+      state.toggles.counterclaim = e.target.checked;
+      renderForm();
+    }
+  });
+  $('formBody').addEventListener('click', (e) => {
+    const quick = e.target.closest('[data-quick-key]');
+    if (quick) {
+      e.preventDefault();
+      onQuick(quick.dataset.quickKey, quick.dataset.quickValue);
+      return;
+    }
+    const toggle = e.target.closest('[data-toggle]');
+    if (toggle) {
+      e.preventDefault();
+      onToggle(toggle.dataset.toggle, toggle.dataset.value);
+    }
+  });
+  $('resetBtn').addEventListener('click', resetAll);
+  $('resetBtn2').addEventListener('click', resetAll);
+  $('copyBtn').addEventListener('click', copyResult);
+  $('printBtn').addEventListener('click', printResult);
+  $('lookBtn').addEventListener('click', () => {
+    $('aside').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function init() {
+  bindEvents();
+  renderTabs();
+  renderCats();
+  renderForm();
+  $('printDate').textContent = new Date().toLocaleString('zh-CN', { hour12: false });
+}
+
+init();
+
+window.WuhanLitigationFee = { DATA, CATEGORIES, calcScenario, propertyFee, executionFee, preservationFee, parseAmount, money, formatNum, round2 };
+</script>
+</body>
+</html>
